@@ -516,6 +516,6 @@ MonoBehaviour:
   randomEnergyAmountRange: 15
   randomMagicAmountRange: 15
   randomEnergyMagicRatio: 2
-  mapWidth: 101
-  mapHeight: 100
+  mapWidth: 61
+  mapHeight: 45
   wallThickness: 5
