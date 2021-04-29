@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class DungeonMapCreator : MonoBehaviour
 {
     public TileBase wallBlock;
+    public TileBase groundBlock;
     public GameObject emptyBlock;
     public GameObject energyBlock1;
     public GameObject energyBlock2;
@@ -62,7 +63,7 @@ public class DungeonMapCreator : MonoBehaviour
                 if(i==0){
                     // 上の一列の壁作成
                     if(j!=(mapWidth+wallThickness*2)/2) 
-                        tilemap.SetTile(new Vector3Int(j+tileOffsetX,tileOffsetY-i,0), wallBlock);
+                        tilemap.SetTile(new Vector3Int(j+tileOffsetX,tileOffsetY-i,0), groundBlock);
                 } else if(i<mapHeight){
                     // 左右の壁
                     if(j<=wallThickness || j>=mapWidth+wallThickness)                        
