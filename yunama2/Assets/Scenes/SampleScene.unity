@@ -510,7 +510,7 @@ MonoBehaviour:
   mapHeight: 45
   wallThickness: 5
   blockPrefab: {fileID: 6561753330794305170, guid: 1e75fbbf8a6024660b5297bfa5b5192c, type: 3}
-  randomEmptyRange: 4
+  randomEmptyRange: 7
   randomEnergyAmountRange: 15
   randomMagicAmountRange: 15
   randomEnergyMagicRatio: 2

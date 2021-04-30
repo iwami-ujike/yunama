@@ -17,7 +17,8 @@ public class DungeonMapCreator : MonoBehaviour
 
     public GameObject blockPrefab;
 
-    public int randomEmptyRange = 4;
+    // ex. 4 = 40% , 10 = 100%
+    public int randomEmptyRange = 7;
     public int randomEnergyAmountRange = 15;
     public int randomMagicAmountRange = 15;
     // energy / magic ex. 5:1 = 5
@@ -43,7 +44,8 @@ public class DungeonMapCreator : MonoBehaviour
         // 右上から左に行く毎に x＋１下に行く毎に y-1 ブロックの中心は 0.5, 0.5
         for(int i=0; i<mapHeight-1; i++){
             for(int j=0; j<mapWidth-1; j++){
-                Instantiate(blockPrefab, new Vector3(j+wallThickness+1.5f,-i-1+0.5f,0),Quaternion.identity);
+                GameObject block = Instantiate(blockPrefab, new Vector3(j+wallThickness+1.5f,-i-1+0.5f,0),Quaternion.identity);
+                initalizeBlock(block);
             }
         }
     }
@@ -70,8 +72,17 @@ public class DungeonMapCreator : MonoBehaviour
         }
     }
 
-    bool isEmptyBlock() 
-    {
+    void initalizeBlock(GameObject block){
+        BlockController blockController = block.GetComponent<BlockController>();
+        bool isEmpty = Random.Range(0,10) < randomEmptyRange;
+        if (!isEmpty) {
+            // bool isEnergy = Random.Range();
+            int energyAmount = Random.Range(1,randomEnergyAmountRange+1);
+            blockController.changeEnergy(energyAmount);
+        }
+    }
+
+    bool isEmptyBlock() {
         return Random.Range(0, randomEmptyRange) == 0;
     }
 }
