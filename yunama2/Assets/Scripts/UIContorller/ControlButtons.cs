@@ -5,15 +5,14 @@ using UnityEngine;
 public class ControlButtons : MonoBehaviour
 {
     public GameObject cursor;
+    GameObject chosenObject;
     CursorController cursorController;
 
     void Start() {
         cursorController = cursor.GetComponent<CursorController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         
     }
 
@@ -31,5 +30,18 @@ public class ControlButtons : MonoBehaviour
 
     public void onClickDown() {
         cursorController.moveDown();
+    }
+
+    public void clickCircle() {
+        chosenObject = null;
+
+        Ray ray = Camera.main.ScreenPointToRay(transform.position);
+        RaycastHit2D hit2d = Physics2D.Raycast((Vector2)transform.position, -(Vector2)ray.direction);
+
+        if (hit2d) 
+            chosenObject = hit2d.transform.gameObject;
+
+        if (chosenObject && chosenObject.name == "Block(Clone)") 
+            Destroy(chosenObject);
     }
 }

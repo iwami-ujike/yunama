@@ -24,13 +24,11 @@ public class DungeonMapCreator : MonoBehaviour
     // energy / magic ex. 5:1 = 5
     public int randomEnergyMagicRatio = 2;
 
-    void Start()
-    {   
+    void Start() {   
         CreateDungeonMap();
     }
 
-    void Update()
-    {
+    void Update() {
         
     }
 

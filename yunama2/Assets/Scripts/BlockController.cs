@@ -10,8 +10,6 @@ public class BlockController : MonoBehaviour
     public Sprite currentSprite;
     public SpriteRenderer spriteRenderer;
 
-    public Transform transform;
-
     [SerializeField] Sprite emptyBlock;
     [SerializeField] Sprite[] energyBlock =  new Sprite[4];
     [SerializeField] Sprite[] magicBlock =  new Sprite[4];
@@ -19,7 +17,6 @@ public class BlockController : MonoBehaviour
     void Start() {
         getBlockSpritesFromResources();
     }
-
 
     void Update() {
         setBlockSprite(isEnergyBlock(), getLevel());

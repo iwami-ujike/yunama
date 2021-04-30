@@ -8,30 +8,14 @@ public class CursorController : MonoBehaviour
     GameObject chosenBlock;
 
     DungeonMapCreator dungeonMapCreator;
-    // TransForm transForm;
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    void Start() {
         dungeonMapCreator = tileMap.GetComponent<DungeonMapCreator>();
         transform.position = dungeonMapCreator.getEntrance();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) {
- 
-            chosenBlock = null;
- 
-            Ray ray = Camera.main.ScreenPointToRay(transform.position);
-            RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
- 
-            if (hit2d) {
-                chosenBlock = hit2d.transform.gameObject;
-            } 
- 
-            Debug.Log(chosenBlock);
-        }
+    void Update() {
+
     }
 
     public void moveUp(){
