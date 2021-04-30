@@ -34,6 +34,10 @@ public class DungeonMapCreator : MonoBehaviour
         
     }
 
+    public Vector3 getEntrance() {
+        return new Vector3((mapWidth+wallThickness*2)/2.0f-0.5f, -3.75f, 0);
+    }
+
     void CreateDungeonMap(){
         createOutsideWall();
         createInsideBlocks();
