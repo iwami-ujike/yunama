@@ -34,6 +34,10 @@ public class DungeonMapCreator : MonoBehaviour
         
     }
 
+    public Vector3 getEntrance() {
+        return new Vector3((mapWidth+wallThickness*2)/2.0f-0.5f, -3.75f, 0);
+    }
+
     void CreateDungeonMap(){
         createOutsideWall();
         createInsideBlocks();
@@ -44,7 +48,7 @@ public class DungeonMapCreator : MonoBehaviour
         // 右上から左に行く毎に x＋１下に行く毎に y-1 ブロックの中心は 0.5, 0.5
         for(int i=0; i<mapHeight-1; i++){
             for(int j=0; j<mapWidth-1; j++){
-                GameObject block = Instantiate(blockPrefab, new Vector3(j+wallThickness+1.5f,-i-1+0.5f,0),Quaternion.identity);
+                GameObject block = Instantiate(blockPrefab, new Vector3(j+wallThickness+1.5f,-i-1+0.5f,0), Quaternion.identity);
                 initalizeBlock(block);
             }
         }
@@ -77,7 +81,13 @@ public class DungeonMapCreator : MonoBehaviour
         bool isEmpty = Random.Range(0,10) < randomEmptyRange;
         if (!isEmpty) {
             // bool isEnergy = Random.Range();
-            int energyAmount = Random.Range(1,randomEnergyAmountRange+1);
+            int energyAmount = 0;
+            bool isEnergyRich = Random.Range(0,10) > 8;
+            if (isEnergyRich) {
+                energyAmount = Random.Range(10,randomEnergyAmountRange+1);
+            } else {
+                energyAmount = Random.Range(1,10);
+            } 
             blockController.changeEnergy(energyAmount);
         }
     }
