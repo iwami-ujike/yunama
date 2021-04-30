@@ -7,19 +7,6 @@ public class DungeonMapCreator : MonoBehaviour
 {
     public TileBase wallBlock;
     public TileBase groundBlock;
-    public GameObject emptyBlock;
-    public GameObject energyBlock1;
-    public GameObject energyBlock2;
-    public GameObject energyBlock3;
-    public GameObject magicBlock1;
-    public GameObject magicBlock2;
-    public GameObject magicBlock3;
-
-    public int randomEmptyRange = 4;
-    public int randomEnergyAmountRange = 15;
-    public int randomMagicAmountRange = 15;
-    // energy / magic ex. 5:1 = 5
-    public int randomEnergyMagicRatio = 2;
 
     public int mapWidth = 59;
     public int mapHeight = 45;
@@ -28,7 +15,14 @@ public class DungeonMapCreator : MonoBehaviour
     int tileOffsetX = 0;
     int tileOffsetY = 0;
 
-    // public Block block = createBlock();
+    public GameObject blockPrefab;
+
+    // ex. 4 = 40% , 10 = 100%
+    public int randomEmptyRange = 7;
+    public int randomEnergyAmountRange = 15;
+    public int randomMagicAmountRange = 15;
+    // energy / magic ex. 5:1 = 5
+    public int randomEnergyMagicRatio = 2;
 
     void Start()
     {   
@@ -47,9 +41,11 @@ public class DungeonMapCreator : MonoBehaviour
 
     // 掘れるブロック生成
     void createInsideBlocks(){
-        for(int i=0; i<mapWidth; i++){
-            for(int j=0; j<mapHeight; j++){
-
+        // 右上から左に行く毎に x＋１下に行く毎に y-1 ブロックの中心は 0.5, 0.5
+        for(int i=0; i<mapHeight-1; i++){
+            for(int j=0; j<mapWidth-1; j++){
+                GameObject block = Instantiate(blockPrefab, new Vector3(j+wallThickness+1.5f,-i-1+0.5f,0), Quaternion.identity);
+                initalizeBlock(block);
             }
         }
     }
@@ -76,8 +72,23 @@ public class DungeonMapCreator : MonoBehaviour
         }
     }
 
-    bool isEmptyBlock() 
-    {
+    void initalizeBlock(GameObject block){
+        BlockController blockController = block.GetComponent<BlockController>();
+        bool isEmpty = Random.Range(0,10) < randomEmptyRange;
+        if (!isEmpty) {
+            // bool isEnergy = Random.Range();
+            int energyAmount = 0;
+            bool isEnergyRich = Random.Range(0,10) > 8;
+            if (isEnergyRich) {
+                energyAmount = Random.Range(10,randomEnergyAmountRange+1);
+            } else {
+                energyAmount = Random.Range(1,10);
+            } 
+            blockController.changeEnergy(energyAmount);
+        }
+    }
+
+    bool isEmptyBlock() {
         return Random.Range(0, randomEmptyRange) == 0;
     }
 }
