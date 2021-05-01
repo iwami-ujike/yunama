@@ -6,7 +6,7 @@ public class CreatureController : MonoBehaviour
 {
     // 0→上 1→左 2→右 3→下
     [SerializeField] int direction = 0;
-    public float speed = 0.01f;
+    public float speed = 0.02f;
     [SerializeField] bool willChangeDirection = false;
     [SerializeField] bool changingDirection = false;
 
