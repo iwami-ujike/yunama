@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3109542896196321432}
   m_Layer: 0
   m_Name: Block
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,6 @@ MonoBehaviour:
   magicAmount: 0
   currentSprite: {fileID: 0}
   spriteRenderer: {fileID: 6561753330794305171}
-  transform: {fileID: 6561753330794305168}
   emptyBlock: {fileID: 0}
   energyBlock:
   - {fileID: 0}

@@ -47,6 +47,10 @@ public class DungeonController : MonoBehaviour
         }
     }
 
+    public bool isBlockEmpty(int[] position) {
+        return isInsideWall(position[0], position[1]) && blockMap[position[1], position[0]] == 0;
+    }
+
     bool isBlockDestroyable(GameObject block) {
         BlockController blockController = block.GetComponent<BlockController>();
         // block じゃないときは破壊しない
@@ -65,7 +69,7 @@ public class DungeonController : MonoBehaviour
             int nextX = position[0] + dx[i];
             int nextY = position[1] + dy[i];
             // 壁の内側にあるか確認
-            if (!hasEmptyNeighboringBlock &&  wallThickness < nextX && nextX < mapWidth+wallThickness && 1 <= nextY && nextY < mapHeight-1) {
+            if (!hasEmptyNeighboringBlock && isInsideWall(nextX, nextY)) {
                 // 隣に空のブロックがある
                 if (blockMap[nextY,nextX] == 0) hasEmptyNeighboringBlock = true;
             }
@@ -89,5 +93,9 @@ public class DungeonController : MonoBehaviour
 
     void setBlockMap(int x, int y, int setNum) {
         blockMap[y, x] = setNum;
+    }
+
+    bool isInsideWall(int x, int y) {
+        return wallThickness < x && x < mapWidth+wallThickness && 1 <= y && y < mapHeight-1;
     }
 }
