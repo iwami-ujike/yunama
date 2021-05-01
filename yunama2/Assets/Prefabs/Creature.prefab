@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  speed: 0.01
+  speed: 0.02
   willChangeDirection: 0
   changingDirection: 0
   healthPoint: 10

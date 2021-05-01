@@ -97,6 +97,23 @@ public class BlockController : MonoBehaviour
             energyBlock[i] = Resources.Load<Sprite>($"EnergyBlocks/energy_{i}");
             magicBlock[i] = Resources.Load<Sprite>($"MagicBlocks/magic_{i}");
         }
+    }
+
+    public void initalizeBlock(GameObject block, int randomEmptyRange, int randomEnergyAmountRange){
+
+        BlockController blockController = block.GetComponent<BlockController>();
+        bool isEmpty = Random.Range(0,10) < randomEmptyRange;
+        if (!isEmpty) {
+            // bool isEnergy = Random.Range();
+            int energyAmount = 0;
+            bool isEnergyRich = Random.Range(0,10) > 8;
+            if (isEnergyRich) {
+                energyAmount = Random.Range(10,randomEnergyAmountRange+1);
+            } else {
+                energyAmount = Random.Range(1,10);
+            } 
+            blockController.changeEnergy(energyAmount);
+        }
     } 
 
     void changeSprite(Sprite newSprite) {

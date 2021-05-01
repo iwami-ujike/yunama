@@ -98,7 +98,6 @@ public class DungeonController : MonoBehaviour
         setBlockMap(middle, 1, 0); 
         setBlockMap(middle, 2, 0); 
         setBlockMap(middle, 3, 0);
-        Debug.Log(middle); 
     }
 
     void setBlockMap(int x, int y, int setNum) {
