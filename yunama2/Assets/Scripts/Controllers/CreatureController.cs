@@ -19,6 +19,13 @@ public class CreatureController : MonoBehaviour
     [SerializeField] int energyAmount = 10;
     [SerializeField] int magicAmount = 10;
 
+    [SerializeField] bool isCarryType = true;
+    [SerializeField] bool carryTypeIsEnergy = true;
+    [SerializeField] bool carrying = false;
+    [SerializeField] int carryingAmount = 0;
+    [SerializeField] int maxCarryAmount = 10;
+    [SerializeField] bool checkIfCarryBlockAvailable = false;
+
     GameObject cursor;
     GameObject dungeonControllerGO;
     CursorController cursorController;
@@ -37,6 +44,9 @@ public class CreatureController : MonoBehaviour
 
     void FixedUpdate() {
         if (!changingDirection) move();
+        if (checkIfCarryBlockAvailable) collectEnergy();
+        else setCheckIfCarryBlockAvailable();
+
         //animator 
         if (direction==0) {
             animator.SetFloat("Move Y", 1);
@@ -92,7 +102,6 @@ public class CreatureController : MonoBehaviour
                 if (!willChangeDirection) willChangeDirection =
                     !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.CeilToInt(transform.position.y)});
                 if (willChangeDirection && (-transform.position.y)%1.0f < 0.5f) {
-                    // transform.position = new Vector3(transform.position.x, Mathf.FloorToInt(transform.position.y) + 0.5f, 0);
                     changeDirection();
                 }
                 break;
@@ -101,7 +110,6 @@ public class CreatureController : MonoBehaviour
                 if (!willChangeDirection) willChangeDirection =
                     !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x)-1, -Mathf.FloorToInt(transform.position.y)});
                 if (willChangeDirection && transform.position.x%1.0f < 0.5f) {
-                    // transform.position = new Vector3(Mathf.CeilToInt(transform.position.x) - 0.5f, transform.position.y, 0);
                     changeDirection();
                 }
                 break;
@@ -110,7 +118,6 @@ public class CreatureController : MonoBehaviour
                 if (!willChangeDirection) willChangeDirection =
                     !dungeonController.isBlockEmpty(new int[] {Mathf.CeilToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y)});
                 if (willChangeDirection && transform.position.x%1.0f > 0.5f) {
-                    // transform.position = new Vector3(Mathf.FloorToInt(transform.position.x) + 0.5f, transform.position.y, 0);
                     changeDirection();
                 }
                 break;
@@ -119,10 +126,65 @@ public class CreatureController : MonoBehaviour
                 if (!willChangeDirection) willChangeDirection =
                     !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y-1.0f)});
                 if (willChangeDirection && (-transform.position.y)%1.0f > 0.5f) {
-                    // transform.position = new Vector3(transform.position.x, Mathf.CeilToInt(transform.position.y) - 0.5f, 0);
                     changeDirection();
                 }
                 break;
+        }
+    }
+
+    bool aroundCenterOfBlock() {
+        if (direction == 0 && -transform.position.y%1.0f > 0.46f && -transform.position.y%1.0f < 0.54f) return true;
+        else if (direction == 1 && transform.position.x%1.0f > 0.46f && transform.position.x%1.0f < 0.54f) return true;
+        else if (direction == 2 && transform.position.x%1.0f > 0.46f && transform.position.x%1.0f < 0.54f) return true;
+        else if (direction == 3 && -transform.position.y%1.0f > 0.46f && -transform.position.y%1.0f < 0.54f) return true;
+        else return false;
+    }
+
+    void setCheckIfCarryBlockAvailable() {
+        checkIfCarryBlockAvailable = !carrying && aroundCenterOfBlock(); 
+    }
+
+    void collectEnergy() {
+        int[] possibleDirections = new int[4];
+        int possibleDirectionsIdx = 0;
+        int[] position = currentPosition();
+
+        int[] dx = {0, -1, 1, 0};
+        int[] dy = {-1, 0, 0, 1};
+        for(int i=0; i<4; i++){
+            int x = position[0] + dx[i];
+            int y = position[1] + dy[i];
+            GameObject block = GameObject.Find("Block_" + x + "_" + y);
+
+            if(block != null) {
+                BlockController blockController = block.GetComponent<BlockController>();
+                if (blockController.energyAmount > 0) {
+                    possibleDirections[possibleDirectionsIdx] = i;
+                    possibleDirectionsIdx++;
+                }
+            }
+        }
+        int random = Random.Range(0,possibleDirectionsIdx+1);
+
+        if (possibleDirectionsIdx > 0) {
+            int nextX = position[0] + dx[possibleDirections[random]];
+            int nextY = position[1] + dy[possibleDirections[random]];
+            GameObject chosenBlock = GameObject.Find("Block_" + nextX + "_" + nextY);
+            BlockController chosenBlockController = chosenBlock.GetComponent<BlockController>();
+
+            int currentMaxCarryAmount = maxCarryAmount - carryingAmount;
+
+            if (chosenBlockController.energyAmount > currentMaxCarryAmount) {
+                chosenBlockController.changeEnergy(-1*currentMaxCarryAmount);
+                carryingAmount += currentMaxCarryAmount;
+            } else {
+                carryingAmount += chosenBlockController.energyAmount;
+                chosenBlockController.changeEnergy(-1*chosenBlockController.energyAmount);
+            }
+            Debug.Log("carry");
+            carrying = true;
+            checkIfCarryBlockAvailable = false;
+            animator.SetTrigger("Drain");
         }
     }
 

@@ -99,8 +99,7 @@ public class BlockController : MonoBehaviour
         }
     }
 
-    public void initalizeBlock(GameObject block, int randomEmptyRange, int randomEnergyAmountRange){
-
+    public void initalizeBlock(GameObject block, int randomEmptyRange, int randomEnergyAmountRange, int y, int x){
         BlockController blockController = block.GetComponent<BlockController>();
         bool isEmpty = Random.Range(0,10) < randomEmptyRange;
         if (!isEmpty) {
@@ -114,6 +113,7 @@ public class BlockController : MonoBehaviour
             } 
             blockController.changeEnergy(energyAmount);
         }
+        blockController.name = "Block_" + x + "_" + y;
     } 
 
     void changeSprite(Sprite newSprite) {

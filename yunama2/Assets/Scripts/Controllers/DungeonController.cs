@@ -39,9 +39,14 @@ public class DungeonController : MonoBehaviour
             int[] position = blockController.getPostition();
             position[1] = -position[1];
 
+            bool createCreature = blockController.getLevel() > 0;
+
             Destroy(block);
             setBlockMap(position[0], position[1], 0);
-            Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+
+            if (createCreature) {
+                Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+            }
         } else {
             // 消す
             Debug.Log("not destroyable");
@@ -50,15 +55,13 @@ public class DungeonController : MonoBehaviour
     }
 
     public bool isBlockEmpty(int[] position) {
-        Debug.Log(position[0]);
-        Debug.Log(position[1]);
         return isInsideWall(position[0], position[1]) && blockMap[position[1], position[0]] == 0;
     }
 
     bool isBlockDestroyable(GameObject block) {
         BlockController blockController = block.GetComponent<BlockController>();
         // block じゃないときは破壊しない
-        if (blockController.name != "Block(Clone)") return false;
+        if (blockController.tag != "Block") return false;
 
         int[] position = blockController.getPostition();
         // y は反転
