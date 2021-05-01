@@ -59,7 +59,7 @@ public class DungeonMapCreator : MonoBehaviour
                 // 入り口から真ん中３つは開けておく
                 if((i == 0 || i == 1 || i== 2) && (j == (mapWidth/2))) continue;
                 GameObject block = Instantiate(blockPrefab, new Vector3(j+wallThickness+0.5f,-i-1+0.5f,0), Quaternion.identity);
-                blockController.initalizeBlock(block,randomEmptyRange,randomEnergyAmountRange);
+                blockController.initalizeBlock(block, randomEmptyRange, randomEnergyAmountRange);
             }
         }
     }
