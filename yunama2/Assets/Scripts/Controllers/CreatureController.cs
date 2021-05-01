@@ -92,7 +92,6 @@ public class CreatureController : MonoBehaviour
                 if (!willChangeDirection) willChangeDirection =
                     !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.CeilToInt(transform.position.y)});
                 if (willChangeDirection && (-transform.position.y)%1.0f < 0.5f) {
-                    // transform.position = new Vector3(transform.position.x, Mathf.FloorToInt(transform.position.y) + 0.5f, 0);
                     changeDirection();
                 }
                 break;
@@ -101,7 +100,6 @@ public class CreatureController : MonoBehaviour
                 if (!willChangeDirection) willChangeDirection =
                     !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x)-1, -Mathf.FloorToInt(transform.position.y)});
                 if (willChangeDirection && transform.position.x%1.0f < 0.5f) {
-                    // transform.position = new Vector3(Mathf.CeilToInt(transform.position.x) - 0.5f, transform.position.y, 0);
                     changeDirection();
                 }
                 break;
@@ -110,7 +108,6 @@ public class CreatureController : MonoBehaviour
                 if (!willChangeDirection) willChangeDirection =
                     !dungeonController.isBlockEmpty(new int[] {Mathf.CeilToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y)});
                 if (willChangeDirection && transform.position.x%1.0f > 0.5f) {
-                    // transform.position = new Vector3(Mathf.FloorToInt(transform.position.x) + 0.5f, transform.position.y, 0);
                     changeDirection();
                 }
                 break;
@@ -119,7 +116,6 @@ public class CreatureController : MonoBehaviour
                 if (!willChangeDirection) willChangeDirection =
                     !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y-1.0f)});
                 if (willChangeDirection && (-transform.position.y)%1.0f > 0.5f) {
-                    // transform.position = new Vector3(transform.position.x, Mathf.CeilToInt(transform.position.y) - 0.5f, 0);
                     changeDirection();
                 }
                 break;
