@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DungeonController : MonoBehaviour
 {
+    public GameObject creaturePrefab;
     public int mapWidth = 59;
     public int mapHeight = 45;
     public int wallThickness = 5;
@@ -40,6 +41,7 @@ public class DungeonController : MonoBehaviour
 
             Destroy(block);
             setBlockMap(position[0], position[1], 0);
+            Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
         } else {
             // 消す
             Debug.Log("not destroyable");
@@ -75,10 +77,6 @@ public class DungeonController : MonoBehaviour
                 // 隣に空のブロックがある
                 if (blockMap[nextY,nextX] == 0) hasEmptyNeighboringBlock = true;
             }
-            Debug.Log(nextX);
-            Debug.Log(nextX);
-            Debug.Log(blockMap[nextY,nextX]);
-            
         }
         return hasEmptyNeighboringBlock;
     }
@@ -95,7 +93,6 @@ public class DungeonController : MonoBehaviour
         setBlockMap(middle, 1, 0); 
         setBlockMap(middle, 2, 0); 
         setBlockMap(middle, 3, 0);
-        Debug.Log(middle); 
     }
 
     void setBlockMap(int x, int y, int setNum) {
