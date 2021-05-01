@@ -78,6 +78,8 @@ public class CreatureController : MonoBehaviour
             animator.SetFloat("Move Y", -1);
             animator.SetFloat("Move X", 0);
         }
+        animator.SetBool("Drain",draining);
+        animator.SetBool("Delivering",delivering);
     }
 
     void waitDrain() {
