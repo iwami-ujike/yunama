@@ -6,18 +6,29 @@ public class CreatureController : MonoBehaviour
 {
     // 0→上 1→左 2→右 3→下
     [SerializeField] int direction = 0;
-    public float speed = 0.01f;
+    public float speed = 0.02f;
     [SerializeField] bool willChangeDirection = false;
     [SerializeField] bool changingDirection = false;
 
-    public GameObject cursor;
-    public GameObject dungeonControllerGO;
+    [SerializeField] int healthPoint = 10;
+    [SerializeField] int magicPoint = 10;
+    [SerializeField] int attackDamage = 10;
+    [SerializeField] int attackPoint = 10;
+    [SerializeField] int armour = 10;
+    [SerializeField] int magicResistance = 10;
+    [SerializeField] int energyAmount = 10;
+    [SerializeField] int magicAmount = 10;
+
+    GameObject cursor;
+    GameObject dungeonControllerGO;
     CursorController cursorController;
     DungeonController dungeonController;
 
     Animator animator;
 
     void Start() {
+        cursor = GameObject.Find("Cursor");
+        dungeonControllerGO = GameObject.Find("DungeonController");
         cursorController = cursor.GetComponent<CursorController>();
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
         
