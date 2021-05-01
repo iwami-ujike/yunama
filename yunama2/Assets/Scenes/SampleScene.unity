@@ -1687,7 +1687,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1788,6 +1788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallBlock: {fileID: 11400000, guid: 2413badf37a0090409a08705c37950f3, type: 2}
   groundBlock: {fileID: 11400000, guid: 9bd2512ce52cc4e4e9077307c8f7b6b8, type: 2}
+  insidewallBlock: {fileID: 11400000, guid: b22c7fbe6949a2f47a2c4a217e48d19f, type: 2}
   blockPrefab: {fileID: 6561753330794305170, guid: 1e75fbbf8a6024660b5297bfa5b5192c, type: 3}
   dungeonControllerGO: {fileID: 1246579197}
 --- !u!1 &1592861485

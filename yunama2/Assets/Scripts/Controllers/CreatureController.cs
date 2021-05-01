@@ -47,7 +47,7 @@ public class CreatureController : MonoBehaviour
         }
 
         int random = Random.Range(0,possibleDirectionsIdx+1);
-        Debug.Log(possibleDirections[random]);
+        //Debug.Log(possibleDirections[random]);
         return possibleDirections[random];
     }
 
