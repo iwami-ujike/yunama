@@ -21,14 +21,24 @@ public class CreatureController : MonoBehaviour
 
     [SerializeField] bool isCarryType = true;
     [SerializeField] bool carryTypeIsEnergy = true;
-    [SerializeField] bool carrying = false;
-    [SerializeField] bool waitToCarry = false;
     [SerializeField] int carryingAmount = 0;
     [SerializeField] int maxCarryAmount = 10;
-    [SerializeField] bool checkIfCarryBlockAvailable = false;
+    [SerializeField] bool checkIfNonEmptyBlockAvailable = false;
+
+    [SerializeField] bool waitToDrain = false;
+    [SerializeField] bool waitToDeliver = false;
+    [SerializeField] bool waitDraining = false;
+    [SerializeField] bool waitDelivering = false;
+    [SerializeField] bool waitNextAction = false;
+
+    [SerializeField] bool carrying = false;
+    [SerializeField] bool draining = false;
+    [SerializeField] bool delivering = false;
 
     float timer = 0;
-    float waitTime = 2.0f;
+    float waitNextActionTime = 0.5f;
+    float waitDrainTime = 1.0f;
+    float waitDeliverTime = 1.0f;
 
     GameObject cursor;
     GameObject dungeonControllerGO;
@@ -47,17 +57,13 @@ public class CreatureController : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (!changingDirection) move();
-        if (waitToCarry) {
-            timer += Time.deltaTime;
-            if (timer >= waitTime) {
-                waitToCarry = false;
-            }
-        } else {
-            if (checkIfCarryBlockAvailable) drain();
-            else setCheckIfCarryBlockAvailable();
+        if (draining) waitDrain();
+        else if (delivering) waitDeliver();
+        else if (!changingDirection) {
+            move();
+            carrierAction();
         }
-
+        Debug.Log(checkIfNonEmptyBlockAvailable);
         //animator 
         if (direction==0) {
             animator.SetFloat("Move Y", 1);
@@ -71,6 +77,43 @@ public class CreatureController : MonoBehaviour
         } else if (direction==3) {
             animator.SetFloat("Move Y", -1);
             animator.SetFloat("Move X", 0);
+        }
+    }
+
+    void waitDrain() {
+        if (waitDraining) {
+            timer += Time.deltaTime;
+            if (timer >= waitDrainTime) {
+                timer = 0;
+                waitDraining = false;
+                draining = false;
+            }
+        }
+    }
+
+    void waitDeliver() {
+        if (waitDelivering) {
+            timer += Time.deltaTime;
+            if (timer >= waitDeliverTime) {
+                timer = 0;
+                waitDelivering = false;
+                delivering = false;
+            }
+        }
+    }
+
+    void carrierAction() {
+        if (waitNextAction) {
+            timer += Time.deltaTime;
+            if (timer >= waitNextActionTime) {
+                timer = 0;
+                waitNextAction = false;
+            }
+        } else if(!draining && !delivering) {
+            if (checkIfNonEmptyBlockAvailable) {
+                exchangeEnergyOrMagic(true, !carrying);
+            }
+            setcheckIfNonEmptyBlockAvailable();
         }
     }
 
@@ -144,15 +187,21 @@ public class CreatureController : MonoBehaviour
     }
 
     bool aroundCenterOfBlock() {
-        if (direction == 0 && -transform.position.y%1.0f > 0.46f && -transform.position.y%1.0f < 0.54f) return true;
-        else if (direction == 1 && transform.position.x%1.0f > 0.46f && transform.position.x%1.0f < 0.54f) return true;
-        else if (direction == 2 && transform.position.x%1.0f > 0.46f && transform.position.x%1.0f < 0.54f) return true;
-        else if (direction == 3 && -transform.position.y%1.0f > 0.46f && -transform.position.y%1.0f < 0.54f) return true;
+        float x = transform.position.x;
+        float y = -(transform.position.y);
+
+        bool centerX = x%1.00f > 0.495f && x%1.00f < 0.505f;
+        bool centerY = y%1.00f > 0.495f && y%1.00f < 0.505f;
+
+        if (direction == 0 && centerY) return true;
+        else if (direction == 1 && centerX) return true;
+        else if (direction == 2 && centerX) return true;
+        else if (direction == 3 && centerY) return true;
         else return false;
     }
 
-    void setCheckIfCarryBlockAvailable() {
-        checkIfCarryBlockAvailable = !carrying && aroundCenterOfBlock(); 
+    void setcheckIfNonEmptyBlockAvailable() {
+        checkIfNonEmptyBlockAvailable = aroundCenterOfBlock(); 
     }
 
     void exchangeEnergyOrMagic(bool isEnergy, bool isDrain) {
@@ -175,7 +224,7 @@ public class CreatureController : MonoBehaviour
                 }
             }
         }
-        int random = Random.Range(0,possibleDirectionsIdx+1);
+        int random = Random.Range(0,possibleDirectionsIdx);
 
         if (possibleDirectionsIdx > 0) {
             int nextX = position[0] + dx[possibleDirections[random]];
@@ -193,15 +242,23 @@ public class CreatureController : MonoBehaviour
                     carryingAmount += chosenBlockController.energyAmount;
                     chosenBlockController.changeEnergy(-1*chosenBlockController.energyAmount);
                 }
+
                 carrying = true;
-                checkIfCarryBlockAvailable = false;
+                draining = true;
+                waitDraining = true;
+                checkIfNonEmptyBlockAvailable = false;
+                Debug.Log("drain");
             } else {
                 chosenBlockController.changeEnergy(carryingAmount);
                 carryingAmount = 0;
+
                 carrying = false;
-                checkIfCarryBlockAvailable = false;
-                waitToCarry = true;
+                delivering = true;
+                waitDelivering = true;
+                checkIfNonEmptyBlockAvailable = false;
+                Debug.Log("deliver");
             }
+            waitNextAction = true;
         }
     }
 
