@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  speed: 0.02
+  speed: 0.03
   willChangeDirection: 0
   changingDirection: 0
   healthPoint: 10
@@ -110,6 +110,19 @@ MonoBehaviour:
   magicResistance: 10
   energyAmount: 10
   magicAmount: 10
+  isCarryType: 1
+  carryTypeIsEnergy: 1
+  carryingAmount: 0
+  maxCarryAmount: 3
+  checkIfNonEmptyBlockAvailable: 0
+  waitToDrain: 0
+  waitToDeliver: 0
+  waitDraining: 0
+  waitDelivering: 0
+  waitNextAction: 0
+  carrying: 0
+  draining: 0
+  delivering: 0
 --- !u!50 &2155856106934520480
 Rigidbody2D:
   serializedVersion: 4

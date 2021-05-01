@@ -67,13 +67,15 @@ public class BlockController : MonoBehaviour
 
     public int getLevel() {
         // lv0 0
-        // lv1 1 - 14 
-        // lv2 15 - 29
+        // lv1 1 - 9
+        // lv2 10 - 29
         // lv3 30 -
         if (energyAmount == 0 && magicAmount == 0) 
             return 0;
-        else if(Mathf.Max(energyAmount, magicAmount) < 44)
-            return Mathf.Max(energyAmount, magicAmount)/15 + 1;
+        else if(Mathf.Max(energyAmount, magicAmount) <= 9)
+            return 1;
+        else if(Mathf.Max(energyAmount, magicAmount) <= 29)
+            return 2;
         else 
             return 3;
     }
@@ -107,9 +109,9 @@ public class BlockController : MonoBehaviour
             int energyAmount = 0;
             bool isEnergyRich = Random.Range(0,10) > 8;
             if (isEnergyRich) {
-                energyAmount = Random.Range(10,randomEnergyAmountRange+1);
+                energyAmount = Random.Range(6,randomEnergyAmountRange+1);
             } else {
-                energyAmount = Random.Range(1,10);
+                energyAmount = Random.Range(1,6);
             } 
             blockController.changeEnergy(energyAmount);
         }

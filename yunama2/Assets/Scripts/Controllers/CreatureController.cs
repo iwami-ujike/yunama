@@ -22,7 +22,7 @@ public class CreatureController : MonoBehaviour
     [SerializeField] bool isCarryType = true;
     [SerializeField] bool carryTypeIsEnergy = true;
     [SerializeField] int carryingAmount = 0;
-    [SerializeField] int maxCarryAmount = 10;
+    [SerializeField] int maxCarryAmount = 3;
     [SerializeField] bool checkIfNonEmptyBlockAvailable = false;
 
     [SerializeField] bool waitToDrain = false;
@@ -80,6 +80,7 @@ public class CreatureController : MonoBehaviour
         }
         animator.SetBool("Drain",draining);
         animator.SetBool("Delivering",delivering);
+        animator.SetBool("isCarrying",carrying);
     }
 
     void waitDrain() {
@@ -192,8 +193,8 @@ public class CreatureController : MonoBehaviour
         float x = transform.position.x;
         float y = -(transform.position.y);
 
-        bool centerX = x%1.00f > 0.495f && x%1.00f < 0.505f;
-        bool centerY = y%1.00f > 0.495f && y%1.00f < 0.505f;
+        bool centerX = x%1.00f > 0.48f && x%1.00f < 0.52f;
+        bool centerY = y%1.00f > 0.48f && y%1.00f < 0.52f;
 
         if (direction == 0 && centerY) return true;
         else if (direction == 1 && centerX) return true;
@@ -245,20 +246,22 @@ public class CreatureController : MonoBehaviour
                     chosenBlockController.changeEnergy(-1*chosenBlockController.energyAmount);
                 }
 
-                carrying = true;
+                carrying = carryingAmount > 1;
                 draining = true;
                 waitDraining = true;
                 checkIfNonEmptyBlockAvailable = false;
                 Debug.Log("drain");
             } else {
-                chosenBlockController.changeEnergy(carryingAmount);
-                carryingAmount = 0;
+                if (carrying) {
+                    chosenBlockController.changeEnergy(carryingAmount -1);
+                    carryingAmount = 1;
 
-                carrying = false;
-                delivering = true;
-                waitDelivering = true;
-                checkIfNonEmptyBlockAvailable = false;
-                Debug.Log("deliver");
+                    carrying = false;
+                    delivering = true;
+                    waitDelivering = true;
+                    checkIfNonEmptyBlockAvailable = false;
+                    Debug.Log("deliver");
+                }
             }
             waitNextAction = true;
         }
