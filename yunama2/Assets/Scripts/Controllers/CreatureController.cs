@@ -22,9 +22,13 @@ public class CreatureController : MonoBehaviour
     [SerializeField] bool isCarryType = true;
     [SerializeField] bool carryTypeIsEnergy = true;
     [SerializeField] bool carrying = false;
+    [SerializeField] bool waitToCarry = false;
     [SerializeField] int carryingAmount = 0;
     [SerializeField] int maxCarryAmount = 10;
     [SerializeField] bool checkIfCarryBlockAvailable = false;
+
+    float timer = 0;
+    float waitTime = 2.0f;
 
     GameObject cursor;
     GameObject dungeonControllerGO;
@@ -44,8 +48,15 @@ public class CreatureController : MonoBehaviour
 
     void FixedUpdate() {
         if (!changingDirection) move();
-        if (checkIfCarryBlockAvailable) collectEnergy();
-        else setCheckIfCarryBlockAvailable();
+        if (waitToCarry) {
+            timer += Time.deltaTime;
+            if (timer >= waitTime) {
+                waitToCarry = false;
+            }
+        } else {
+            if (checkIfCarryBlockAvailable) drain();
+            else setCheckIfCarryBlockAvailable();
+        }
 
         //animator 
         if (direction==0) {
@@ -144,7 +155,7 @@ public class CreatureController : MonoBehaviour
         checkIfCarryBlockAvailable = !carrying && aroundCenterOfBlock(); 
     }
 
-    void collectEnergy() {
+    void exchangeEnergyOrMagic(bool isEnergy, bool isDrain) {
         int[] possibleDirections = new int[4];
         int possibleDirectionsIdx = 0;
         int[] position = currentPosition();
@@ -172,18 +183,25 @@ public class CreatureController : MonoBehaviour
             GameObject chosenBlock = GameObject.Find("Block_" + nextX + "_" + nextY);
             BlockController chosenBlockController = chosenBlock.GetComponent<BlockController>();
 
-            int currentMaxCarryAmount = maxCarryAmount - carryingAmount;
+            if (isDrain) {
+                int currentMaxCarryAmount = maxCarryAmount - carryingAmount;
 
-            if (chosenBlockController.energyAmount > currentMaxCarryAmount) {
-                chosenBlockController.changeEnergy(-1*currentMaxCarryAmount);
-                carryingAmount += currentMaxCarryAmount;
+                if (chosenBlockController.energyAmount > currentMaxCarryAmount) {
+                    chosenBlockController.changeEnergy(-1*currentMaxCarryAmount);
+                    carryingAmount += currentMaxCarryAmount;
+                } else {
+                    carryingAmount += chosenBlockController.energyAmount;
+                    chosenBlockController.changeEnergy(-1*chosenBlockController.energyAmount);
+                }
+                carrying = true;
+                checkIfCarryBlockAvailable = false;
             } else {
-                carryingAmount += chosenBlockController.energyAmount;
-                chosenBlockController.changeEnergy(-1*chosenBlockController.energyAmount);
+                chosenBlockController.changeEnergy(carryingAmount);
+                carryingAmount = 0;
+                carrying = false;
+                checkIfCarryBlockAvailable = false;
+                waitToCarry = true;
             }
-            Debug.Log("carry");
-            carrying = true;
-            checkIfCarryBlockAvailable = false;
         }
     }
 
