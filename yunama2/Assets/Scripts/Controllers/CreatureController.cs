@@ -13,14 +13,34 @@ public class CreatureController : MonoBehaviour
     CursorController cursorController;
     DungeonController dungeonController;
 
+    Animator animator;
+
     void Start() {
         cursorController = cursor.GetComponent<CursorController>();
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
+        
+        animator = GetComponent<Animator>();
     }
 
     void FixedUpdate() {
         // Debug.Log(currentPosition()[0]);
         // Debug.Log(currentPosition()[1]);
+
+        //animator 
+        if (direction==0) {
+            animator.SetFloat("Move Y", 1);
+            animator.SetFloat("Move X", 0);
+        } else if (direction==1) {
+            animator.SetFloat("Move Y", 0);
+            animator.SetFloat("Move X", -1);
+        } else if (direction==2) {
+            animator.SetFloat("Move Y", 0);
+            animator.SetFloat("Move X", 1);
+        } else if (direction==3) {
+            animator.SetFloat("Move Y", -1);
+            animator.SetFloat("Move X", 0);
+        }
+        
         move();
     }
 
