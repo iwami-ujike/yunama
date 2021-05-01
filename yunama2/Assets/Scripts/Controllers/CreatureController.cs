@@ -5,8 +5,10 @@ using UnityEngine;
 public class CreatureController : MonoBehaviour
 {
     // 0→上 1→左 2→右 3→下
-    int direction = 0;
+    [SerializeField] int direction = 0;
     public float speed = 0.01f;
+    [SerializeField] bool willChangeDirection = false;
+    [SerializeField] bool changingDirection = false;
 
     public GameObject cursor;
     public GameObject dungeonControllerGO;
@@ -19,13 +21,14 @@ public class CreatureController : MonoBehaviour
     }
 
     void FixedUpdate() {
-        // Debug.Log(currentPosition()[0]);
-        // Debug.Log(currentPosition()[1]);
-        move();
+        if (!changingDirection) move();
     }
 
     void changeDirection() {
+        changingDirection = true;
         direction = randomDirection();
+        changingDirection = false;
+        willChangeDirection = false;
     }
 
     int randomDirection() {
@@ -41,13 +44,9 @@ public class CreatureController : MonoBehaviour
             if(dungeonController.isBlockEmpty(new int[] {nextX, nextY})) {
                 possibleDirections[possibleDirectionsIdx] = i;
                 possibleDirectionsIdx++;
-                // Debug.Log(nextX);
-                // Debug.Log(nextY);
             }
         }
-
         int random = Random.Range(0,possibleDirectionsIdx+1);
-        Debug.Log(possibleDirections[random]);
         return possibleDirections[random];
     }
 
@@ -61,25 +60,48 @@ public class CreatureController : MonoBehaviour
         switch(direction) {
             case 0: 
                 transform.position = transform.position + new Vector3(0, 1f*speed, 0);
-                if (!dungeonController.isBlockEmpty(new int[] {Mathf.CeilToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y)})) {
-
+                if (!willChangeDirection) willChangeDirection =
+                    !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.CeilToInt(transform.position.y)});
+                if (willChangeDirection && (-transform.position.y)%1.0f < 0.5f) {
+                    // transform.position = new Vector3(transform.position.x, Mathf.FloorToInt(transform.position.y) + 0.5f, 0);
+                    changeDirection();
                 }
                 break;
             case 1: 
                 transform.position = transform.position + new Vector3(-1f*speed, 0, 0);
+                if (!willChangeDirection) willChangeDirection =
+                    !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x)-1, -Mathf.FloorToInt(transform.position.y)});
+                if (willChangeDirection && transform.position.x%1.0f < 0.5f) {
+                    // transform.position = new Vector3(Mathf.CeilToInt(transform.position.x) - 0.5f, transform.position.y, 0);
+                    changeDirection();
+                }
                 break;
             case 2: 
                 transform.position = transform.position + new Vector3(1f*speed, 0, 0);
+                if (!willChangeDirection) willChangeDirection =
+                    !dungeonController.isBlockEmpty(new int[] {Mathf.CeilToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y)});
+                if (willChangeDirection && transform.position.x%1.0f > 0.5f) {
+                    // transform.position = new Vector3(Mathf.FloorToInt(transform.position.x) + 0.5f, transform.position.y, 0);
+                    changeDirection();
+                }
                 break;
             case 3: 
                 transform.position = transform.position + new Vector3(0, -1f*speed, 0);
+                if (!willChangeDirection) willChangeDirection =
+                    !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y-1.0f)});
+                if (willChangeDirection && (-transform.position.y)%1.0f > 0.5f) {
+                    // transform.position = new Vector3(transform.position.x, Mathf.CeilToInt(transform.position.y) - 0.5f, 0);
+                    changeDirection();
+                }
                 break;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.collider.tag == "Block") {
-            Debug.Log("敵と接触した！");
+    void checkNextBlock() {
+        if (willChangeDirection) willChangeDirection =
+            !dungeonController.isBlockEmpty(new int[] {Mathf.CeilToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y)});
+        if (willChangeDirection && transform.position.y%1.0f < 0.5f) {
+            transform.position = new Vector3(transform.position.x, Mathf.FloorToInt(transform.position.y) + 0.5f, 0);
             changeDirection();
         }
     }

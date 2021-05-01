@@ -48,6 +48,8 @@ public class DungeonController : MonoBehaviour
     }
 
     public bool isBlockEmpty(int[] position) {
+        Debug.Log(position[0]);
+        Debug.Log(position[1]);
         return isInsideWall(position[0], position[1]) && blockMap[position[1], position[0]] == 0;
     }
 

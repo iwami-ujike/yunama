@@ -1511,7 +1511,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
 --- !u!50 &1302685973
 Rigidbody2D:
@@ -1546,7 +1546,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5292853d3051a415db910211b52aaaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.05
+  direction: 0
+  speed: 0.01
+  willChangeDirection: 0
+  changingDirection: 0
   cursor: {fileID: 24509077}
   dungeonControllerGO: {fileID: 1246579197}
 --- !u!212 &1302685975
