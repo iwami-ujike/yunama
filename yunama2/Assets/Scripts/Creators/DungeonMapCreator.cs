@@ -7,6 +7,7 @@ public class DungeonMapCreator : MonoBehaviour
 {
     public TileBase wallBlock;
     public TileBase groundBlock;
+    public TileBase insidewallBlock;
 
     public GameObject blockPrefab;
     public GameObject dungeonControllerGO;
@@ -46,6 +47,7 @@ public class DungeonMapCreator : MonoBehaviour
     void CreateDungeonMap(){
         createOutsideWall();
         createInsideBlocks();
+        createInisdeWallBlocks();
     }
 
     // 掘れるブロック生成
@@ -82,6 +84,15 @@ public class DungeonMapCreator : MonoBehaviour
             }
         }
     }
+    void createInisdeWallBlocks() {
+        var insidewall = GetComponent<Tilemap>();
+        Vector3Int position = new Vector3Int(0,0,0);
+        for(int i=0; i<mapHeight-1; i++) {
+            for(int j=0; j<mapWidth; j++) {
+                insidewall.SetTile(new Vector3Int(j+wallThickness,-i-1,0),insidewallBlock);
+            }
+        }
+    }       
 
     void initalizeBlock(GameObject block){
         BlockController blockController = block.GetComponent<BlockController>();

@@ -75,6 +75,10 @@ public class DungeonController : MonoBehaviour
                 // 隣に空のブロックがある
                 if (blockMap[nextY,nextX] == 0) hasEmptyNeighboringBlock = true;
             }
+            Debug.Log(nextX);
+            Debug.Log(nextX);
+            Debug.Log(blockMap[nextY,nextX]);
+            
         }
         return hasEmptyNeighboringBlock;
     }
@@ -90,7 +94,8 @@ public class DungeonController : MonoBehaviour
         int middle = (mapWidth+wallThickness*2)/2;
         setBlockMap(middle, 1, 0); 
         setBlockMap(middle, 2, 0); 
-        setBlockMap(middle, 3, 0); 
+        setBlockMap(middle, 3, 0);
+        Debug.Log(middle); 
     }
 
     void setBlockMap(int x, int y, int setNum) {

@@ -45,6 +45,8 @@ public class ControlButtons : MonoBehaviour
 
         if (hit2d) {
             chosenObject = hit2d.transform.gameObject;
+            Debug.Log(chosenObject.GetComponent<BlockController>().transform.position.x);
+            Debug.Log(chosenObject.GetComponent<BlockController>().transform.position.y);
             dungeonController.destroyBlock(chosenObject);
         }
     }
