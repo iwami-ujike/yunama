@@ -62,9 +62,7 @@ public class BlockController : MonoBehaviour
     }
 
     public int[] getPostition() {
-        // 座標の位置をいい感じに返す
-        // return new int[] { transform.position.x, transform.position.y };
-        return new int[] {0,0};
+        return new int[] { (int)(transform.position.x - 0.5f), (int)(transform.position.y - 0.5f) };
     }
 
     public int getLevel() {

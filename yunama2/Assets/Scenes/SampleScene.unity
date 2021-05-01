@@ -1002,6 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 24509077}
+  dungeonControllerGO: {fileID: 1246579197}
 --- !u!1 &1169012266
 GameObject:
   m_ObjectHideFlags: 0

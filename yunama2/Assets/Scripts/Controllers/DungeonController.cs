@@ -17,6 +17,8 @@ public class DungeonController : MonoBehaviour
 
     public int[,] blockMap;
 
+    GameObject chosenBlock;
+
     void Start() {
         initalizeBlockMap();
     }
@@ -30,16 +32,62 @@ public class DungeonController : MonoBehaviour
         return new Vector3((mapWidth+wallThickness*2)/2.0f-0.5f, -3.75f, 0);
     }
 
+    public void destroyBlock(GameObject block) {
+        if (isBlockDestroyable(block)) {
+            BlockController blockController = block.GetComponent<BlockController>();
+            int[] position = blockController.getPostition();
+            position[1] = -position[1];
+
+            Destroy(block);
+            setBlockMap(position[0], position[1], 0);
+        } else {
+            // 消す
+            Debug.Log("not destroyable");
+            // 消す
+        }
+    }
+
+    bool isBlockDestroyable(GameObject block) {
+        BlockController blockController = block.GetComponent<BlockController>();
+        // block じゃないときは破壊しない
+        if (blockController.name != "Block(Clone)") return false;
+
+        int[] position = blockController.getPostition();
+        // y は反転
+        position[1] = -position[1];
+        
+        // 左右上下を確認
+        int[] dx = {0, 0, 1, -1};
+        int[] dy = {1, -1, 0, 0};
+        bool hasEmptyNeighboringBlock = false;
+
+        for(int i=0; i<4; i++){
+            int nextX = position[0] + dx[i];
+            int nextY = position[1] + dy[i];
+            // 壁の内側にあるか確認
+            if (!hasEmptyNeighboringBlock &&  wallThickness < nextX && nextX < mapWidth+wallThickness && 1 <= nextY && nextY < mapHeight-1) {
+                // 隣に空のブロックがある
+                if (blockMap[nextY,nextX] == 0) hasEmptyNeighboringBlock = true;
+            }
+        }
+        return hasEmptyNeighboringBlock;
+    }
+
     void initalizeBlockMap(){
-        blockMap = new int[mapHeight, mapWidth];
-        for(int i=0; i<mapHeight; i++){
-            for(int j=0; j<mapWidth; j++){
+        blockMap = new int[mapHeight+ wallThickness + 1, mapWidth + wallThickness*2 + 1];
+        for(int i=1; i<=mapHeight; i++){
+            for(int j=wallThickness; j<mapWidth+wallThickness; j++){
                 blockMap[i,j] = 1;
             }
         }
         // 真ん中３つはあいてるから、０にする
-        blockMap[0,(mapWidth+wallThickness*2)/2] = 0;
-        blockMap[1,(mapWidth+wallThickness*2)/2] = 0;
-        blockMap[2,(mapWidth+wallThickness*2)/2] = 0;
+        int middle = (mapWidth+wallThickness*2)/2;
+        setBlockMap(middle, 1, 0); 
+        setBlockMap(middle, 2, 0); 
+        setBlockMap(middle, 3, 0); 
+    }
+
+    void setBlockMap(int x, int y, int setNum) {
+        blockMap[y, x] = setNum;
     }
 }
