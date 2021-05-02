@@ -65,16 +65,16 @@ public class CreatureController : MonoBehaviour
         }
         Debug.Log(checkIfNonEmptyBlockAvailable);
         //animator 
-        if (direction==0) {
+        if (direction == 0) {
             animator.SetFloat("Move Y", 1);
             animator.SetFloat("Move X", 0);
-        } else if (direction==1) {
+        } else if (direction == 1) {
             animator.SetFloat("Move Y", 0);
             animator.SetFloat("Move X", -1);
-        } else if (direction==2) {
+        } else if (direction == 2) {
             animator.SetFloat("Move Y", 0);
             animator.SetFloat("Move X", 1);
-        } else if (direction==3) {
+        } else if (direction == 3) {
             animator.SetFloat("Move Y", -1);
             animator.SetFloat("Move X", 0);
         }

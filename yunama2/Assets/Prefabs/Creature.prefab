@@ -108,8 +108,8 @@ MonoBehaviour:
   attackPoint: 10
   armour: 10
   magicResistance: 10
-  energyAmount: 10
-  magicAmount: 10
+  energyAmount: 9
+  magicAmount: 9
   isCarryType: 1
   carryTypeIsEnergy: 1
   carryingAmount: 0

@@ -1094,6 +1094,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 24509077}
   dungeonControllerGO: {fileID: 1246579197}
+  waitInput: 0.1
+  waitingInput: 1
 --- !u!1001 &1165450754
 PrefabInstance:
   m_ObjectHideFlags: 0
