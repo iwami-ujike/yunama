@@ -45,6 +45,7 @@ public class CreatureController : MonoBehaviour
     CursorController cursorController;
     DungeonController dungeonController;
 
+
     Animator animator;
 
     void Start() {
@@ -81,6 +82,10 @@ public class CreatureController : MonoBehaviour
         animator.SetBool("Drain",draining);
         animator.SetBool("Delivering",delivering);
         animator.SetBool("isCarrying",carrying);
+    }
+
+    public void amount(int energycarrying) {
+        carryingAmount = energycarrying;
     }
 
     void waitDrain() {
@@ -262,8 +267,7 @@ public class CreatureController : MonoBehaviour
                     checkIfNonEmptyBlockAvailable = false;
                     Debug.Log("deliver");
                 }
-            }
-            waitNextAction = true;
+            }   
         }
     }
 }

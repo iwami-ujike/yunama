@@ -36,8 +36,11 @@ public class DungeonController : MonoBehaviour
     public void destroyBlock(GameObject block) {
         if (isBlockDestroyable(block)) {
             BlockController blockController = block.GetComponent<BlockController>();
+            CreatureController creatureController = creaturePrefab.GetComponent<CreatureController>();
             int[] position = blockController.getPostition();
             position[1] = -position[1];
+
+            int energyCarrying = blockController.energyAmount;
 
             bool createCreature = blockController.getLevel() > 0;
 
@@ -45,7 +48,10 @@ public class DungeonController : MonoBehaviour
             setBlockMap(position[0], position[1], 0);
 
             if (createCreature) {
-                Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                creatureController.amount(energyCarrying);
+                GameObject creature = creaturePrefab as GameObject;
+                creature.name = "aaa";
+                Instantiate(creature, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
             }
         } else {
             // 消す
