@@ -47,7 +47,7 @@ public class DungeonMapCreator : MonoBehaviour
     void CreateDungeonMap(){
         createOutsideWall();
         createInsideBlocks();
-        createInisdeWallBlocks();
+        createInsideWallBlocks();
     }
 
     // 掘れるブロック生成
@@ -86,7 +86,7 @@ public class DungeonMapCreator : MonoBehaviour
             }
         }
     }
-    void createInisdeWallBlocks() {
+    void createInsideWallBlocks() {
         var insidewall = GetComponent<Tilemap>();
         Vector3Int position = new Vector3Int(0,0,0);
         for(int i=0; i<mapHeight-1; i++) {

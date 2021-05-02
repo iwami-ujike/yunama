@@ -11,8 +11,8 @@ public class DungeonController : MonoBehaviour
 
     // ex. 4 = 40% , 10 = 100%
     public int randomEmptyRange = 7;
-    public int randomEnergyAmountRange = 15;
-    public int randomMagicAmountRange = 15;
+    public int randomEnergyAmountRange = 10;
+    public int randomMagicAmountRange = 10;
     // energy / magic ex. 5:1 = 5
     public int randomEnergyMagicRatio = 2;
 

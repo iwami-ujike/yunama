@@ -1311,8 +1311,8 @@ MonoBehaviour:
   mapHeight: 45
   wallThickness: 5
   randomEmptyRange: 7
-  randomEnergyAmountRange: 15
-  randomMagicAmountRange: 15
+  randomEnergyAmountRange: 10
+  randomMagicAmountRange: 10
   randomEnergyMagicRatio: 2
 --- !u!4 &1246579199
 Transform:
