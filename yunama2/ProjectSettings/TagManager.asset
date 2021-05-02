@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Block
   - Creature
+  - Enemy
   layers:
   - Default
   - TransparentFX

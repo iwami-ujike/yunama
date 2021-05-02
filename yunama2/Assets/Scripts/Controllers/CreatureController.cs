@@ -63,7 +63,7 @@ public class CreatureController : MonoBehaviour
             move();
             carrierAction();
         }
-        Debug.Log(checkIfNonEmptyBlockAvailable);
+
         //animator 
         if (direction == 0) {
             animator.SetFloat("Move Y", 1);
@@ -142,7 +142,7 @@ public class CreatureController : MonoBehaviour
                 possibleDirectionsIdx++;
             }
         }
-        int random = Random.Range(0,possibleDirectionsIdx+1);
+        int random = Random.Range(0,possibleDirectionsIdx);
         return possibleDirections[random];
     }
 
@@ -264,15 +264,6 @@ public class CreatureController : MonoBehaviour
                 }
             }
             waitNextAction = true;
-        }
-    }
-
-    void checkNextBlock() {
-        if (willChangeDirection) willChangeDirection =
-            !dungeonController.isBlockEmpty(new int[] {Mathf.CeilToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y)});
-        if (willChangeDirection && transform.position.y%1.0f < 0.5f) {
-            transform.position = new Vector3(transform.position.x, Mathf.FloorToInt(transform.position.y) + 0.5f, 0);
-            changeDirection();
         }
     }
 }
