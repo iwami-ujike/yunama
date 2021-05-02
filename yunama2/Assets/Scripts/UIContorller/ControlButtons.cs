@@ -11,13 +11,39 @@ public class ControlButtons : MonoBehaviour
     
     GameObject chosenObject;
 
+    public float waitInput = 0.1f;
+    float timer = 0;
+    public bool waitingInput = true;
+
     void Start() {
         cursorController = cursor.GetComponent<CursorController>();
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
     }
 
     void Update() {
-        
+        if (waitingInput) {
+            float ad = Input.GetAxisRaw("Horizontal");
+            float ws = Input.GetAxisRaw("Vertical");
+            if (ad == 1) {
+                onClickRight();
+                waitingInput = false;
+            } else if (ad == -1) {
+                onClickLeft();
+                waitingInput = false;
+            } else if (ws == 1) {
+                onClickUp();
+                waitingInput = false;
+            } else if (ws == -1) {
+                onClickDown();
+                waitingInput = false;
+            }
+        } else {
+            timer += Time.deltaTime;
+            if(timer > waitInput) {
+                timer = 0;
+                waitingInput = true;
+            }
+        }
     }
 
     public void onClickUp() {
