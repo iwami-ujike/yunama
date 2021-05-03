@@ -5,6 +5,7 @@ using UnityEngine;
 public class DungeonController : MonoBehaviour
 {
     public GameObject creaturePrefab;
+    public GameObject enemyPrefab;
     public int mapWidth = 59;
     public int mapHeight = 45;
     public int wallThickness = 5;
