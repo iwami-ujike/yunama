@@ -45,6 +45,7 @@ public class CreatureController : MonoBehaviour
     CursorController cursorController;
     DungeonController dungeonController;
 
+
     Animator animator;
 
     void Start() {
@@ -65,22 +66,26 @@ public class CreatureController : MonoBehaviour
         }
 
         //animator 
-        if (direction==0) {
+        if (direction == 0) {
             animator.SetFloat("Move Y", 1);
             animator.SetFloat("Move X", 0);
-        } else if (direction==1) {
+        } else if (direction == 1) {
             animator.SetFloat("Move Y", 0);
             animator.SetFloat("Move X", -1);
-        } else if (direction==2) {
+        } else if (direction == 2) {
             animator.SetFloat("Move Y", 0);
             animator.SetFloat("Move X", 1);
-        } else if (direction==3) {
+        } else if (direction == 3) {
             animator.SetFloat("Move Y", -1);
             animator.SetFloat("Move X", 0);
         }
         animator.SetBool("Drain",draining);
         animator.SetBool("Delivering",delivering);
         animator.SetBool("isCarrying",carrying);
+    }
+
+    public void amount(int energycarrying) {
+        carryingAmount = energycarrying;
     }
 
     void waitDrain() {
@@ -262,8 +267,7 @@ public class CreatureController : MonoBehaviour
                     checkIfNonEmptyBlockAvailable = false;
                     Debug.Log("deliver");
                 }
-            }
-            waitNextAction = true;
+            }   
         }
     }
 }
