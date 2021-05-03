@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 Base path: '/Users/yuma/Unity/2020.3.3f1/Unity.app/Contents', plugins path '/Users/yuma/Unity/2020.3.3f1/Unity.app/Contents/PlaybackEngines'
 Cmd: initializeCompiler
 
 Unhandled exception: Protocol error - failed to read magic number (error -2147483644, transferred 0/4)
 
 Quitting shader compiler process
+=======
+Base path: 'C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/PlaybackEngines'
+Cmd: initializeCompiler
+
+Unhandled exception: Protocol error - failed to read magic number (error -2147483644, transferred 0/4)
+
+Quitting shader compiler process
+>>>>>>> c95913e812913609cbef53962fb2ed6304f95eda
