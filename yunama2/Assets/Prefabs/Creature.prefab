@@ -112,7 +112,7 @@ MonoBehaviour:
   magicAmount: 9
   isCarryType: 1
   carryTypeIsEnergy: 1
-  carryingAmount: 3
+  carryingAmount: 8
   maxCarryAmount: 3
   checkIfNonEmptyBlockAvailable: 0
   waitToDrain: 0
