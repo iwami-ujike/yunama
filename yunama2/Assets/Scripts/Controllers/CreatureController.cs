@@ -44,16 +44,19 @@ public class CreatureController : MonoBehaviour
     GameObject dungeonControllerGO;
     CursorController cursorController;
     DungeonController dungeonController;
-
+    
+    [SerializeField] GameObject creatureDataGO;
+    [SerializeField] CreatureData creatureData;
 
     Animator animator;
 
     void Start() {
         cursor = GameObject.Find("Cursor");
         dungeonControllerGO = GameObject.Find("DungeonController");
+
         cursorController = cursor.GetComponent<CursorController>();
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
-        
+
         animator = GetComponent<Animator>();
     }
 
@@ -269,5 +272,27 @@ public class CreatureController : MonoBehaviour
                 }
             }   
         }
+    }
+
+    public void setCreatureStatus(string newName, int carryingEnergyAmount) {
+        creatureDataGO = GameObject.Find("CreatureData");
+        creatureData = creatureDataGO.GetComponent<CreatureData>();
+
+        name = newName;
+
+        Hashtable data = creatureData.getStatus(newName);
+
+        healthPoint = (int)data["healthPoint"];
+        magicPoint = (int)data["magicPoint"];
+        attackDamage = (int)data["attackDamage"];
+        attackPoint = (int)data["attackPoint"];
+        armour = (int)data["armour"];
+        magicResistance = (int)data["magicResistance"];
+        energyAmount = (int)data["energyAmount"];
+        magicAmount = (int)data["magicAmount"];
+
+        isCarryType = (int)data["isCarryType"] == 1;
+
+        if (isCarryType) carryingAmount = carryingEnergyAmount;
     }
 }

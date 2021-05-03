@@ -102,17 +102,17 @@ MonoBehaviour:
   speed: 0.03
   willChangeDirection: 0
   changingDirection: 0
-  healthPoint: 10
-  magicPoint: 10
-  attackDamage: 10
-  attackPoint: 10
-  armour: 10
-  magicResistance: 10
-  energyAmount: 9
-  magicAmount: 9
+  healthPoint: 12
+  magicPoint: 12
+  attackDamage: 12
+  attackPoint: 12
+  armour: 12
+  magicResistance: 12
+  energyAmount: 12
+  magicAmount: 12
   isCarryType: 1
   carryTypeIsEnergy: 1
-  carryingAmount: 8
+  carryingAmount: 3
   maxCarryAmount: 3
   checkIfNonEmptyBlockAvailable: 0
   waitToDrain: 0
@@ -123,6 +123,8 @@ MonoBehaviour:
   carrying: 0
   draining: 0
   delivering: 0
+  creatureDataGO: {fileID: 0}
+  creatureData: {fileID: 0}
 --- !u!50 &2155856106934520480
 Rigidbody2D:
   serializedVersion: 4

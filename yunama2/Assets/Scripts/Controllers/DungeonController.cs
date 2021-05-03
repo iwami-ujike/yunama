@@ -41,18 +41,17 @@ public class DungeonController : MonoBehaviour
             int[] position = blockController.getPostition();
             position[1] = -position[1];
 
-            int energyCarrying = blockController.energyAmount;
+            int blockEnergyAmount = blockController.energyAmount;
+            int blockLevel = blockController.getLevel();
 
-            bool createCreature = blockController.getLevel() > 0;
+            bool createCreature = blockLevel > 0;
 
             Destroy(block);
             setBlockMap(position[0], position[1], 0);
 
             if (createCreature) {
-                creatureController.setCarryingAmount(energyCarrying);
-                GameObject creature = creaturePrefab as GameObject;
-                creature.name = "aaa";
-                Instantiate(creature, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
             }
         } else {
             // 消す
@@ -111,5 +110,14 @@ public class DungeonController : MonoBehaviour
 
     bool isInsideWall(int x, int y) {
         return wallThickness < x && x < mapWidth+wallThickness && 1 <= y && y < mapHeight-1;
+    }
+
+    string getNewCreatureName(int blockLevel) {
+        switch(blockLevel) {
+            case 1:
+                return "Yukiusagi";
+            break;
+        }
+        return "errorName";
     }
 }
