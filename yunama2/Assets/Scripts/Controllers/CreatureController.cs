@@ -35,10 +35,10 @@ public class CreatureController : MonoBehaviour
     [SerializeField] bool draining = false;
     [SerializeField] bool delivering = false;
 
-    float timer = 0;
-    float waitNextActionTime = 0.5f;
-    float waitDrainTime = 1.0f;
-    float waitDeliverTime = 1.0f;
+    [SerializeField] float timer = 0;
+    [SerializeField] float waitNextActionTime = 2f;
+    [SerializeField] float waitDrainTime = 1.2f;
+    [SerializeField] float waitDeliverTime = 1.2f;
 
     GameObject cursor;
     GameObject dungeonControllerGO;
@@ -293,6 +293,9 @@ public class CreatureController : MonoBehaviour
 
         isCarryType = (int)data["isCarryType"] == 1;
 
-        if (isCarryType) carryingAmount = carryingEnergyAmount;
+        if (isCarryType) {
+           carryingAmount = carryingEnergyAmount;
+           carrying = true; 
+        } 
     }
 }

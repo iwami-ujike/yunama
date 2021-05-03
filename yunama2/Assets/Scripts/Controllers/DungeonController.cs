@@ -37,7 +37,6 @@ public class DungeonController : MonoBehaviour
     public void destroyBlock(GameObject block) {
         if (isBlockDestroyable(block)) {
             BlockController blockController = block.GetComponent<BlockController>();
-            CreatureController creatureController = creaturePrefab.GetComponent<CreatureController>();
             int[] position = blockController.getPostition();
             position[1] = -position[1];
 
@@ -50,7 +49,8 @@ public class DungeonController : MonoBehaviour
             setBlockMap(position[0], position[1], 0);
 
             if (createCreature) {
-                Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                GameObject newCreature = Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                CreatureController creatureController = newCreature.GetComponent<CreatureController>();
                 creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
             }
         } else {
