@@ -36,4 +36,8 @@ public class CursorController : MonoBehaviour
     public void moveDown(){
         transform.position += new Vector3(0, -1, 0);
     }
+
+    void initalizeCursor() {
+        // transform.scale = new Vector3(8, 7.8, 1);
+    }
 }
