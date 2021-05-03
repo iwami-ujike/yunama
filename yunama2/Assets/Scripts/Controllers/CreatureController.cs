@@ -36,7 +36,7 @@ public class CreatureController : MonoBehaviour
     [SerializeField] bool delivering = false;
 
     [SerializeField] float timer = 0;
-    [SerializeField] float waitNextActionTime = 2f;
+    [SerializeField] float waitNextActionTime = 0.2f;
     [SerializeField] float waitDrainTime = 1.2f;
     [SerializeField] float waitDeliverTime = 1.2f;
 
@@ -85,10 +85,6 @@ public class CreatureController : MonoBehaviour
         animator.SetBool("Drain",draining);
         animator.SetBool("Delivering",delivering);
         animator.SetBool("isCarrying",carrying);
-    }
-
-    public void setCarryingAmount(int energycarrying) {
-        carryingAmount = energycarrying;
     }
 
     void waitDrain() {
@@ -271,6 +267,7 @@ public class CreatureController : MonoBehaviour
                     Debug.Log("deliver");
                 }
             }   
+            waitNextAction = true;
         }
     }
 

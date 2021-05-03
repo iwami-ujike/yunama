@@ -123,6 +123,10 @@ MonoBehaviour:
   carrying: 0
   draining: 0
   delivering: 0
+  timer: 0
+  waitNextActionTime: 0.5
+  waitDrainTime: 1.2
+  waitDeliverTime: 1.2
   creatureDataGO: {fileID: 0}
   creatureData: {fileID: 0}
 --- !u!50 &2155856106934520480
