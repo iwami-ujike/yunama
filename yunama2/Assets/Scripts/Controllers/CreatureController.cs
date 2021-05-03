@@ -84,7 +84,7 @@ public class CreatureController : MonoBehaviour
         animator.SetBool("isCarrying",carrying);
     }
 
-    public void amount(int energycarrying) {
+    public void setCarryingAmount(int energycarrying) {
         carryingAmount = energycarrying;
     }
 

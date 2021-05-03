@@ -49,7 +49,7 @@ public class DungeonController : MonoBehaviour
             setBlockMap(position[0], position[1], 0);
 
             if (createCreature) {
-                creatureController.amount(energyCarrying);
+                creatureController.setCarryingAmount(energyCarrying);
                 GameObject creature = creaturePrefab as GameObject;
                 creature.name = "aaa";
                 Instantiate(creature, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
