@@ -65,9 +65,10 @@ public class DungeonController : MonoBehaviour
     }
 
     bool isBlockDestroyable(GameObject block) {
-        BlockController blockController = block.GetComponent<BlockController>();
         // block じゃないときは破壊しない
-        if (blockController.tag != "Block") return false;
+        if (block.tag != "Block") return false;
+        
+        BlockController blockController = block.GetComponent<BlockController>();
 
         int[] position = blockController.getPostition();
         // y は反転
