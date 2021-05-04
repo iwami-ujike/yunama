@@ -83,12 +83,13 @@ public class EnemyController : MonoBehaviour
     }
 
     void changeDirection() {
-        Debug.Log("changing direction");
         changingDirection = true;
+
         int[] position = currentPosition();
         walkedMap[position[1], position[0]] += 1;
-        Debug.Log(position[0] + " , " + position[1] + " : " + walkedMap[position[1], position[0]]);
+
         direction = chooseDirection();
+
         changingDirection = false;
     }
 
@@ -105,7 +106,6 @@ public class EnemyController : MonoBehaviour
             int nextX = position[0] + dx[i];
             int nextY = position[1] + dy[i];
             if(dungeonController.isBlockEmpty(new int[] {nextX, nextY})) {
-                Debug.Log("possible " + nextX + " , " + nextY + " : " + walkedMap[nextY, nextX]);
                 if (walkedMap[nextY, nextX] < leastWalkedNum) {
                     leastWalkedNum = walkedMap[nextY, nextX];
                     possibleDirections = new int[4];
