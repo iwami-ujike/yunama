@@ -7,6 +7,7 @@ public class DungeonController : MonoBehaviour
     public GameObject creature_1Prefab;
     public GameObject creature_2Prefab;
     public GameObject creature_3Prefab;
+    public GameObject creature_4Prefab;
     public GameObject enemyPrefab;
     public int mapWidth = 59;
     public int mapHeight = 45;
@@ -27,8 +28,7 @@ public class DungeonController : MonoBehaviour
         initalizeBlockMap();
     }
 
-    void Update()
-    {
+    void Update() {
         
     }
 
@@ -39,7 +39,7 @@ public class DungeonController : MonoBehaviour
     public void destroyBlock(GameObject block) {
         if (isBlockDestroyable(block)) {
             BlockController blockController = block.GetComponent<BlockController>();
-            int[] position = blockController.getPostition();
+            int[] position = blockController.getPostition(); 
             position[1] = -position[1];
 
             int blockEnergyAmount = blockController.energyAmount;
@@ -60,15 +60,46 @@ public class DungeonController : MonoBehaviour
                     CreatureController creatureController = newCreature.GetComponent<CreatureController>();
                     creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
                 } else if (blockLevel == 3) {
-                    GameObject newCreature = Instantiate(creature_3Prefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
-                    CreatureController creatureController = newCreature.GetComponent<CreatureController>();
-                    creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
+                    if (aroundBlock(position[0], position[1]) == true) {
+                        GameObject newCreature = Instantiate(creature_3Prefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                        CreatureController creatureController = newCreature.GetComponent<CreatureController>();
+                        creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
+                    } else {    
+                        GameObject newCreature = Instantiate(creature_4Prefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                        CreatureController creatureController = newCreature.GetComponent<CreatureController>();
+                        creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
+                    }
                 }
             }
         } else {
             // 消す
             Debug.Log("not destroyable");
             // 消す
+        }
+    }
+
+    public bool aroundBlock (int x, int y) {
+        int[] z = new int[] {x+1, x-1, y+1, y-1};
+        if (GameObject.Find("Block_" + z[0] + "_" + y)) {
+            return true;
+        } else if (GameObject.Find("Block_" + z[0] + "_" + z[2])) {
+            return true;
+        } else if (GameObject.Find("Block_" + z[0] + "_" + z[3])) {
+            return true;
+        } else if (GameObject.Find("Block_" + z[1] + "_" + z[2])) {
+            return true;
+        } else if (GameObject.Find("Block_" + z[1] + "_" + z[3])) {
+            return true;
+        } else if (GameObject.Find("Block_" + x + "_" + z[2])) {
+            return true;
+        } else if (GameObject.Find("Block_" + x + "_" + z[3])) {
+            return true;
+        } else if (GameObject.Find("Block_" + z[0] + "_" + y)) {
+            return true;
+        } else if ((GameObject.Find("Block_" + z[1] + "_" + y))) {
+            return true;
+        } else {
+            return false;
         }
     }
 
