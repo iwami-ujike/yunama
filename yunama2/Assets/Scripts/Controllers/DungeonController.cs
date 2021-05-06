@@ -79,28 +79,17 @@ public class DungeonController : MonoBehaviour
     }
 
     public bool aroundBlock (int x, int y) {
-        int[] z = new int[] {x+1, x-1, y+1, y-1};
-        if (GameObject.Find("Block_" + z[0] + "_" + y)) {
-            return true;
-        } else if (GameObject.Find("Block_" + z[0] + "_" + z[2])) {
-            return true;
-        } else if (GameObject.Find("Block_" + z[0] + "_" + z[3])) {
-            return true;
-        } else if (GameObject.Find("Block_" + z[1] + "_" + z[2])) {
-            return true;
-        } else if (GameObject.Find("Block_" + z[1] + "_" + z[3])) {
-            return true;
-        } else if (GameObject.Find("Block_" + x + "_" + z[2])) {
-            return true;
-        } else if (GameObject.Find("Block_" + x + "_" + z[3])) {
-            return true;
-        } else if (GameObject.Find("Block_" + z[0] + "_" + y)) {
-            return true;
-        } else if ((GameObject.Find("Block_" + z[1] + "_" + y))) {
-            return true;
-        } else {
-            return false;
+        int[] z = new int[] {x-1, x, x+1};
+        int[] c = new int[] {y-1, y, y+1};
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (i == 1 && j == 1) { 
+                } else if (GameObject.Find("Block_" + z[i] + "_" + c[j])) {
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
     public bool isBlockEmpty(int[] position) {
