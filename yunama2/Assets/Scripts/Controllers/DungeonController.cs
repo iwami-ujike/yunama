@@ -5,6 +5,7 @@ using UnityEngine;
 public class DungeonController : MonoBehaviour
 {
     public GameObject creaturePrefab;
+    public GameObject medamaPrefab;
     public GameObject enemyPrefab;
     public int mapWidth = 59;
     public int mapHeight = 45;
@@ -49,9 +50,15 @@ public class DungeonController : MonoBehaviour
             setBlockMap(position[0], position[1], 0);
 
             if (createCreature) {
-                GameObject newCreature = Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
-                CreatureController creatureController = newCreature.GetComponent<CreatureController>();
-                creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
+                if (blockLevel == 1) {
+                    GameObject newCreature = Instantiate(creaturePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    CreatureController creatureController = newCreature.GetComponent<CreatureController>();
+                    creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
+                } else if (blockLevel == 2) {
+                    GameObject newCreature = Instantiate(medamaPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    CreatureController creatureController = newCreature.GetComponent<CreatureController>();
+                    creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
+                }
             }
         } else {
             // 消す
@@ -118,6 +125,9 @@ public class DungeonController : MonoBehaviour
             case 1:
                 return "Yukiusagi";
             break;
+            case 2:
+                return "Medama";
+            break;   
         }
         return "errorName";
     }

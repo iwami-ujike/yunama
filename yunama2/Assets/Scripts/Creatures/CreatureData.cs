@@ -23,7 +23,7 @@ public class CreatureData : MonoBehaviour
                 data.Add("magicAmount", 12);
                 data.Add("isCarryType", 1);
             break;
-            case "abc":
+            case "Medama":
                 data.Add("healthPoint", 15);
                 data.Add("magicPoint", 15);
                 data.Add("attackDamage", 15);
