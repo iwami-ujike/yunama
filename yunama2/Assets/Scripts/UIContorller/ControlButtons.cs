@@ -71,4 +71,8 @@ public class ControlButtons : MonoBehaviour
     public void clickDelta() {
         cursorController.cameraZoom();    
     }
+
+    public void clickSquare() {
+        cursorController.detailsBlock();
+    }
 }

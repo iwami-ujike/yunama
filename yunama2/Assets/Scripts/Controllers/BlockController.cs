@@ -61,6 +61,10 @@ public class BlockController : MonoBehaviour
         return energyAmount >= magicAmount;
     }
 
+    public bool isMagicBlock() {
+        return magicAmount >= energyAmount;
+    }
+
     public int[] getPostition() {
         return new int[] { (int)(transform.position.x - 0.5f), (int)(transform.position.y - 0.5f) };
     }

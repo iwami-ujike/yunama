@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DungeonController : MonoBehaviour
 {
-    public GameObject creature_1Prefab;
-    public GameObject creature_2Prefab;
-    public GameObject creature_3Prefab;
-    public GameObject creature_4Prefab;
+    public GameObject energyPrefab;
+    public GameObject magicPrefab;
+    public GameObject medamaPrefab;
+    public GameObject mithrilPrefab;
+    public GameObject pegasusPrefab;
     public GameObject enemyPrefab;
+
+    public GameObject details_object = null;
+
     public int mapWidth = 59;
     public int mapHeight = 45;
     public int wallThickness = 5;
@@ -43,6 +48,7 @@ public class DungeonController : MonoBehaviour
             position[1] = -position[1];
 
             int blockEnergyAmount = blockController.energyAmount;
+            int blockMagicAmount = blockController.magicAmount;
             int blockLevel = blockController.getLevel();
 
             bool createCreature = blockLevel > 0;
@@ -51,24 +57,28 @@ public class DungeonController : MonoBehaviour
             setBlockMap(position[0], position[1], 0);
 
             if (createCreature) {
-                if (blockLevel == 1) {
-                    GameObject newCreature = Instantiate(creature_1Prefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                if (blockLevel == 1 && blockEnergyAmount > blockMagicAmount) {
+                    GameObject newCreature = Instantiate(energyPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     CreatureController creatureController = newCreature.GetComponent<CreatureController>();
                     creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
-                } else if (blockLevel == 2) {
-                    GameObject newCreature = Instantiate(creature_2Prefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                } else if (blockLevel == 2 && blockEnergyAmount > blockMagicAmount) {
+                    GameObject newCreature = Instantiate(medamaPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     CreatureController creatureController = newCreature.GetComponent<CreatureController>();
                     creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
-                } else if (blockLevel == 3) {
+                } else if (blockLevel == 3 && blockEnergyAmount > blockMagicAmount) {
                     if (aroundBlock(position[0], position[1]) == true) {
-                        GameObject newCreature = Instantiate(creature_3Prefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                        GameObject newCreature = Instantiate(mithrilPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                         CreatureController creatureController = newCreature.GetComponent<CreatureController>();
                         creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
                     } else {    
-                        GameObject newCreature = Instantiate(creature_4Prefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                        GameObject newCreature = Instantiate(pegasusPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                         CreatureController creatureController = newCreature.GetComponent<CreatureController>();
                         creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockEnergyAmount);
-                    }
+                    } 
+                } else if (blockLevel == 1 && blockEnergyAmount < blockMagicAmount) {
+                    GameObject newCreature = Instantiate(magicPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    CreatureController creatureController = newCreature.GetComponent<CreatureController>();
+                    creatureController.setCreatureStatus(getNewCreatureName(blockLevel), blockMagicAmount);
                 }
             }
         } else {
@@ -158,5 +168,26 @@ public class DungeonController : MonoBehaviour
             break;
         }
         return "errorName";
+    }
+
+    public void objectDetailsText(GameObject block) {
+        string text = "";
+        int eAmount = 0;
+        int mAmount = 0;
+        Text details_text = details_object.GetComponent<Text>();
+
+        if (isBlockDestroyable(block)) {
+            BlockController blockController = block.GetComponent<BlockController>();
+            eAmount = blockController.energyAmount;
+            mAmount = blockController.magicAmount;
+            text = "Energy:" + eAmount + "\n" + "Magic:" + mAmount;
+            details_text.text = text;
+        } else {
+            CreatureController creatureController = block.GetComponent<CreatureController>();
+            eAmount = creatureController.getCarryingAmount();
+            text = "Energy:" + eAmount + "\n" + "Magic:" + mAmount;
+            details_text.text = text;
+        }
+
     }
 }

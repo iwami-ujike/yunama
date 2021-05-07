@@ -295,4 +295,8 @@ public class CreatureController : MonoBehaviour
            carrying = true; 
         } 
     }
+
+    public int getCarryingAmount() {
+        return carryingAmount;
+    }
 }

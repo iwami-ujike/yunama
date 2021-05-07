@@ -23,7 +23,20 @@ public class CreatureData : MonoBehaviour
                 data.Add("magicAmount", 12);
                 data.Add("isCarryType", 1);
             break;
+            case "Io":
+            Debug.Log("get Io");
+                data.Add("healthPoint", 12);
+                data.Add("magicPoint", 12);
+                data.Add("attackDamage", 12);
+                data.Add("attackPoint", 12);
+                data.Add("armour", 12);
+                data.Add("magicResistance", 12);
+                data.Add("energyAmount", 12);
+                data.Add("magicAmount", 12);
+                data.Add("isCarryType", 1);
+            break;
             case "Medama":
+            Debug.Log("get Medama");
                 data.Add("healthPoint", 15);
                 data.Add("magicPoint", 15);
                 data.Add("attackDamage", 15);

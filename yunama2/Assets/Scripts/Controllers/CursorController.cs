@@ -26,7 +26,6 @@ public class CursorController : MonoBehaviour
 
     void Update() {
         
-
     }
 
     public void moveUp(){
@@ -67,6 +66,19 @@ public class CursorController : MonoBehaviour
         if (hit2d.transform != null) {
             chosenObject = hit2d.transform.gameObject;
             dungeonController.destroyBlock(chosenObject);
+        }
+    }
+
+    public void detailsBlock() {
+        chosenObject = null;
+
+        Ray ray = Camera.main.ScreenPointToRay(this.transform.position);
+        Vector2 position = new Vector2(this.transform.position.x + 0.5f, this.transform.position.y + 0.25f);
+        RaycastHit2D hit2d = Physics2D.Raycast(position, new Vector2(0f,0f));
+
+        if (hit2d.transform != null) {
+            chosenObject = hit2d.transform.gameObject;
+            dungeonController.objectDetailsText(chosenObject);
         }
     }
 
