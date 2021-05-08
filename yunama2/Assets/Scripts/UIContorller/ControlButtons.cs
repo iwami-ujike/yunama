@@ -17,6 +17,8 @@ public class ControlButtons : MonoBehaviour
     void Start() {
         cursorController = cursor.GetComponent<CursorController>();
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
+
+        cursorController.detailsBlock();
     }
 
     void Update() {
@@ -25,7 +27,6 @@ public class ControlButtons : MonoBehaviour
             float ws = Input.GetAxisRaw("Vertical");
             if (ad == 1) {
                 onClickRight();
-                waitingInput = false;
             } else if (ad == -1) {
                 onClickLeft();
                 waitingInput = false;
@@ -41,6 +42,7 @@ public class ControlButtons : MonoBehaviour
             if(timer > waitInput) {
                 timer = 0;
                 waitingInput = true;
+                cursorController.detailsBlock();
             }
         }
         if (Input.GetKeyDown("space")) {
@@ -50,22 +52,27 @@ public class ControlButtons : MonoBehaviour
 
     public void onClickUp() {
         cursorController.moveUp();
+        waitingInput = false;
     }
 
     public void onClickLeft() {
         cursorController.moveLeft();
+        waitingInput = false;
     }
 
     public void onClickRight() {
         cursorController.moveRight();
+        waitingInput = false;
     }
 
     public void onClickDown() {
         cursorController.moveDown();
+        waitingInput = false;
     }
     
     public void clickCircle() {
         cursorController.destroyThisBlock();
+        cursorController.detailsBlock();
     }
 
     public void clickDelta() {

@@ -19,6 +19,8 @@ public class CreatureController : MonoBehaviour
     [SerializeField] int energyAmount = 10;
     [SerializeField] int magicAmount = 10;
 
+    [SerializeField] bool isEnergyType = true;
+
     [SerializeField] bool isCarryType = true;
     [SerializeField] bool carryTypeIsEnergy = true;
     [SerializeField] int carryingAmount = 0;
@@ -34,11 +36,16 @@ public class CreatureController : MonoBehaviour
     [SerializeField] bool carrying = false;
     [SerializeField] bool draining = false;
     [SerializeField] bool delivering = false;
+    [SerializeField] bool attacking = false;
 
     [SerializeField] float timer = 0;
     [SerializeField] float waitNextActionTime = 0.2f;
     [SerializeField] float waitDrainTime = 1.2f;
     [SerializeField] float waitDeliverTime = 1.2f;
+
+    public int[,] walkedMap;
+
+    [SerializeField] int[] beforePosition;
 
     GameObject cursor;
     GameObject dungeonControllerGO;
@@ -58,14 +65,27 @@ public class CreatureController : MonoBehaviour
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
 
         animator = GetComponent<Animator>();
+        if (isCarryType) {
+            initalizeWalkedMap();
+        }
+        beforePosition = currentPosition();
     }
 
     void FixedUpdate() {
-        if (draining) waitDrain();
-        else if (delivering) waitDeliver();
-        else if (!changingDirection) {
-            move();
-            carrierAction();
+        if (isCarryType) {
+            if (draining) waitDrain();
+            else if (delivering) waitDeliver();
+            else if (attacking) attack();
+            else if (!changingDirection) {
+                move();
+                carrierAction();
+            }
+        } else {
+            if (attacking) { 
+                attack();
+            } else if (!changingDirection) {
+                move();
+            }
         }
 
         //animator 
@@ -82,9 +102,11 @@ public class CreatureController : MonoBehaviour
             animator.SetFloat("Move Y", -1);
             animator.SetFloat("Move X", 0);
         }
-        animator.SetBool("Drain",draining);
-        animator.SetBool("Delivering",delivering);
-        animator.SetBool("isCarrying",carrying);
+        if (isCarryType) {
+            animator.SetBool("Drain",draining);
+            animator.SetBool("Delivering",delivering);
+            animator.SetBool("isCarrying",carrying);
+        }
     }
 
     void waitDrain() {
@@ -124,11 +146,20 @@ public class CreatureController : MonoBehaviour
         }
     }
 
+    void attack() {
+
+    }
+
     void changeDirection() {
         changingDirection = true;
-        direction = randomDirection();
+    
+        if (isCarryType) {
+            direction = randomDirection();
+            willChangeDirection = false;
+        } else {
+            direction = chooseDirection();
+        }
         changingDirection = false;
-        willChangeDirection = false;
     }
 
     int randomDirection() {
@@ -150,6 +181,34 @@ public class CreatureController : MonoBehaviour
         return possibleDirections[random];
     }
 
+    int chooseDirection() {
+        int[] possibleDirections = new int[4];
+        int possibleDirectionsIdx = 0;
+        int[] position = currentPosition();
+
+        int leastWalkedNum = 1000000;
+
+        int[] dx = {0, -1, 1, 0};
+        int[] dy = {-1, 0, 0, 1};
+        for(int i=0; i<4; i++){
+            int nextX = position[0] + dx[i];
+            int nextY = position[1] + dy[i];
+            if(dungeonController.isBlockEmpty(new int[] {nextX, nextY})) {
+                if (walkedMap[nextY, nextX] < leastWalkedNum) {
+                    leastWalkedNum = walkedMap[nextY, nextX];
+                    possibleDirections = new int[4];
+                    possibleDirectionsIdx = 0;
+                } else if (walkedMap[nextY, nextX] > leastWalkedNum) {
+                    continue;
+                }
+                possibleDirections[possibleDirectionsIdx] = i;
+                possibleDirectionsIdx++;
+            }
+        }
+        int random = Random.Range(0,possibleDirectionsIdx);
+        return possibleDirections[random];
+    }
+
     int[] currentPosition() {
         int x = Mathf.FloorToInt(transform.position.x);
         int y = Mathf.FloorToInt(transform.position.y);
@@ -157,39 +216,77 @@ public class CreatureController : MonoBehaviour
     }
 
     void move() {
-        switch(direction) {
-            case 0: 
-                transform.position = transform.position + new Vector3(0, 1f*speed, 0);
-                if (!willChangeDirection) willChangeDirection =
-                    !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.CeilToInt(transform.position.y)});
-                if (willChangeDirection && (-transform.position.y)%1.0f < 0.5f) {
-                    changeDirection();
-                }
-                break;
-            case 1: 
-                transform.position = transform.position + new Vector3(-1f*speed, 0, 0);
-                if (!willChangeDirection) willChangeDirection =
-                    !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x)-1, -Mathf.FloorToInt(transform.position.y)});
-                if (willChangeDirection && transform.position.x%1.0f < 0.5f) {
-                    changeDirection();
-                }
-                break;
-            case 2: 
-                transform.position = transform.position + new Vector3(1f*speed, 0, 0);
-                if (!willChangeDirection) willChangeDirection =
-                    !dungeonController.isBlockEmpty(new int[] {Mathf.CeilToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y)});
-                if (willChangeDirection && transform.position.x%1.0f > 0.5f) {
-                    changeDirection();
-                }
-                break;
-            case 3: 
-                transform.position = transform.position + new Vector3(0, -1f*speed, 0);
-                if (!willChangeDirection) willChangeDirection =
-                    !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y-1.0f)});
-                if (willChangeDirection && (-transform.position.y)%1.0f > 0.5f) {
-                    changeDirection();
-                }
-                break;
+        if (isCarryType) {
+            switch(direction) {
+                case 0: 
+                    transform.position = transform.position + new Vector3(0, 1f*speed, 0);
+                    if (!willChangeDirection) willChangeDirection =
+                        !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.CeilToInt(transform.position.y)});
+                    if (willChangeDirection && (-transform.position.y)%1.0f < 0.5f) {
+                        changeDirection();
+                    }
+                    break;
+                case 1: 
+                    transform.position = transform.position + new Vector3(-1f*speed, 0, 0);
+                    if (!willChangeDirection) willChangeDirection =
+                        !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x)-1, -Mathf.FloorToInt(transform.position.y)});
+                    if (willChangeDirection && transform.position.x%1.0f < 0.5f) {
+                        changeDirection();
+                    }
+                    break;
+                case 2: 
+                    transform.position = transform.position + new Vector3(1f*speed, 0, 0);
+                    if (!willChangeDirection) willChangeDirection =
+                        !dungeonController.isBlockEmpty(new int[] {Mathf.CeilToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y)});
+                    if (willChangeDirection && transform.position.x%1.0f > 0.5f) {
+                        changeDirection();
+                    }
+                    break;
+                case 3: 
+                    transform.position = transform.position + new Vector3(0, -1f*speed, 0);
+                    if (!willChangeDirection) willChangeDirection =
+                        !dungeonController.isBlockEmpty(new int[] {Mathf.FloorToInt(transform.position.x), -Mathf.FloorToInt(transform.position.y-1.0f)});
+                    if (willChangeDirection && (-transform.position.y)%1.0f > 0.5f) {
+                        changeDirection();
+                    }
+                    break;
+            }
+        } else {
+            if (beforePosition[0] != currentPosition()[0] || beforePosition[1] != currentPosition()[1]) {
+                willChangeDirection = true;
+                beforePosition = currentPosition();
+            }
+
+            switch(direction) {
+                case 0: 
+                    transform.position = transform.position + new Vector3(0, 1f*speed, 0);
+                    if (willChangeDirection && (-transform.position.y)%1.0f < 0.5f) {
+                        willChangeDirection = false;
+                        changeDirection();
+                    }
+                    break;
+                case 1: 
+                    transform.position = transform.position + new Vector3(-1f*speed, 0, 0);
+                    if (willChangeDirection && transform.position.x%1.0f < 0.5f) {
+                        willChangeDirection = false;
+                        changeDirection();
+                    }
+                    break;
+                case 2: 
+                    transform.position = transform.position + new Vector3(1f*speed, 0, 0);
+                    if (willChangeDirection && transform.position.x%1.0f > 0.5f) {
+                        willChangeDirection = false;
+                        changeDirection();
+                    }
+                    break;
+                case 3: 
+                    transform.position = transform.position + new Vector3(0, -1f*speed, 0);
+                    if (willChangeDirection && (-transform.position.y)%1.0f > 0.5f) {
+                        willChangeDirection = false;
+                        changeDirection();
+                    }
+                    break;
+            }
         }
     }
 
@@ -225,7 +322,8 @@ public class CreatureController : MonoBehaviour
 
             if(block != null) {
                 BlockController blockController = block.GetComponent<BlockController>();
-                if (blockController.energyAmount > 0) {
+                if ((isEnergy && blockController.energyAmount > 0) 
+                    || (!isEnergy && blockController.magicAmount > 0)) {
                     possibleDirections[possibleDirectionsIdx] = i;
                     possibleDirectionsIdx++;
                 }
@@ -241,13 +339,22 @@ public class CreatureController : MonoBehaviour
 
             if (isDrain) {
                 int currentMaxCarryAmount = maxCarryAmount - carryingAmount;
-
-                if (chosenBlockController.energyAmount > currentMaxCarryAmount) {
-                    chosenBlockController.changeEnergy(-1*currentMaxCarryAmount);
-                    carryingAmount += currentMaxCarryAmount;
+                if (isEnergy) {
+                    if (chosenBlockController.energyAmount > currentMaxCarryAmount) {
+                        chosenBlockController.changeEnergy(-1*currentMaxCarryAmount);
+                        carryingAmount += currentMaxCarryAmount;
+                    } else {
+                        carryingAmount += chosenBlockController.energyAmount;
+                        chosenBlockController.changeEnergy(-1*chosenBlockController.energyAmount);
+                    }
                 } else {
-                    carryingAmount += chosenBlockController.energyAmount;
-                    chosenBlockController.changeEnergy(-1*chosenBlockController.energyAmount);
+                    if (chosenBlockController.magicAmount > currentMaxCarryAmount) {
+                        chosenBlockController.changeMagic(-1*currentMaxCarryAmount);
+                        carryingAmount += currentMaxCarryAmount;
+                    } else {
+                        carryingAmount += chosenBlockController.magicAmount;
+                        chosenBlockController.changeMagic(-1*chosenBlockController.magicAmount);
+                    }
                 }
 
                 carrying = carryingAmount > 1;
@@ -257,7 +364,11 @@ public class CreatureController : MonoBehaviour
                 Debug.Log("drain");
             } else {
                 if (carrying) {
-                    chosenBlockController.changeEnergy(carryingAmount -1);
+                    if (isEnergy) {
+                        chosenBlockController.changeEnergy(carryingAmount -1);
+                    } else {
+                        chosenBlockController.changeMagic(carryingAmount -1);
+                    }
                     carryingAmount = 1;
 
                     carrying = false;
@@ -271,14 +382,13 @@ public class CreatureController : MonoBehaviour
         }
     }
 
-    public void setCreatureStatus(string newName, int carryingEnergyAmount) {
+    public void setCreatureStatus(int level,  int carrying_amount, bool isEnergyType) {
         creatureDataGO = GameObject.Find("CreatureData");
         creatureData = creatureDataGO.GetComponent<CreatureData>();
 
-        name = newName;
+        Hashtable data = creatureData.getStatus(level, isEnergyType);
 
-        Hashtable data = creatureData.getStatus(newName);
-
+        name = data["name"].ToString();
         healthPoint = (int)data["healthPoint"];
         magicPoint = (int)data["magicPoint"];
         attackDamage = (int)data["attackDamage"];
@@ -289,14 +399,31 @@ public class CreatureController : MonoBehaviour
         magicAmount = (int)data["magicAmount"];
 
         isCarryType = (int)data["isCarryType"] == 1;
+        isEnergyType = (int)data["isEnergyType"] == 1;
 
         if (isCarryType) {
-           carryingAmount = carryingEnergyAmount;
-           carrying = true; 
+            carryingAmount = carrying_amount;
+            carrying = true; 
         } 
     }
 
     public int getCarryingAmount() {
         return carryingAmount;
+    }
+
+    void initalizeWalkedMap(){
+        int mapHeight = dungeonController.mapHeight;
+        int mapWidth = dungeonController.mapWidth; 
+        int wallThickness = dungeonController.wallThickness;
+
+        walkedMap = new int[mapHeight+ wallThickness + 1, mapWidth + wallThickness*2 + 1];
+        for (int j=wallThickness; j<mapWidth+wallThickness; j++) {
+                walkedMap[0,j] = 10000;
+        }
+        for (int i=1; i<=mapHeight; i++) {
+            for (int j=wallThickness; j<mapWidth+wallThickness; j++) {
+                walkedMap[i,j] = 0;
+            }
+        }
     }
 }
