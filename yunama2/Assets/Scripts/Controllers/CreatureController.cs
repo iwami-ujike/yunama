@@ -141,10 +141,9 @@ public class CreatureController : MonoBehaviour
                 waitNextAction = false;
             }
         } else if(!draining && !delivering) {
-            if (checkIfNonEmptyBlockAvailable) {
+            if (aroundCenterOfBlock()) {
                 exchangeEnergyOrMagic(isEnergyType, !carrying);
             }
-            setcheckIfNonEmptyBlockAvailable();
         }
     }
 
@@ -296,18 +295,14 @@ public class CreatureController : MonoBehaviour
         float x = transform.position.x;
         float y = -(transform.position.y);
 
-        bool centerX = x%1.00f > 0.48f && x%1.00f < 0.52f;
-        bool centerY = y%1.00f > 0.48f && y%1.00f < 0.52f;
+        bool centerX = 0.49f < x%1.00f && x%1.00f < 0.51f;
+        bool centerY = 0.49f < y%1.00f && y%1.00f < 0.51f;
 
         if (direction == 0 && centerY) return true;
         else if (direction == 1 && centerX) return true;
         else if (direction == 2 && centerX) return true;
         else if (direction == 3 && centerY) return true;
         else return false;
-    }
-
-    void setcheckIfNonEmptyBlockAvailable() {
-        checkIfNonEmptyBlockAvailable = aroundCenterOfBlock(); 
     }
 
     void exchangeEnergyOrMagic(bool isEnergy, bool isDrain) {
@@ -362,7 +357,6 @@ public class CreatureController : MonoBehaviour
                 carrying = carryingAmount > 1;
                 draining = true;
                 waitDraining = true;
-                checkIfNonEmptyBlockAvailable = false;
                 Debug.Log("drain");
             } else {
                 if (carrying) {
@@ -376,7 +370,6 @@ public class CreatureController : MonoBehaviour
                     carrying = false;
                     delivering = true;
                     waitDelivering = true;
-                    checkIfNonEmptyBlockAvailable = false;
                     Debug.Log("deliver");
                 }
             }   

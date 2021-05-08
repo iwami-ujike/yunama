@@ -1,0 +1,76 @@
+Using pre-set license
+
+ COMMAND LINE ARGUMENTS:
+/Users/yuma/Unity/2020.3.3f1/Unity.app/Contents/MacOS/Unity
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+/Users/yuma/Unity/yunama/yunama2
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+57999
+Successfully changed project path to: /Users/yuma/Unity/yunama/yunama2
+/Users/yuma/Unity/yunama/yunama2
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 43.39 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.3f1 (76626098c1c4)
+[Subsystems] Discovering subsystems at path /Users/yuma/Unity/2020.3.3f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/yuma/Unity/yunama/yunama2/Assets
+GfxDevice: creating device client; threaded=0
+2021-05-08 17:21:22.073 Unity[35632:7582160] VG279QM preferred device: AMD Radeon Pro 5300M (high power)
+2021-05-08 17:21:22.073 Unity[35632:7582160] Metal devices available: 2
+2021-05-08 17:21:22.073 Unity[35632:7582160] 0: AMD Radeon Pro 5300M (high power)
+2021-05-08 17:21:22.073 Unity[35632:7582160] 1: Intel(R) UHD Graphics 630 (low power)
+2021-05-08 17:21:22.073 Unity[35632:7582160] Using device AMD Radeon Pro 5300M (high power)
+Initializing Metal device caps: AMD Radeon Pro 5300M
+Initialize mono
+Mono path[0] = '/Users/yuma/Unity/2020.3.3f1/Unity.app/Contents/Managed'
+Mono path[1] = '/Users/yuma/Unity/2020.3.3f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = '/Users/yuma/Unity/2020.3.3f1/Unity.app/Contents/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56632
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Users/yuma/Unity/2020.3.3f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Users/yuma/Unity/2020.3.3f1/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002176 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 33.53 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.918 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.001707 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 32.52 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.086 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launching external process: /Users/yuma/Unity/2020.3.3f1/Unity.app/Contents/Tools/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.02 seconds
+Refreshing native plugins compatible for Editor in 0.34 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1820 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 159.4 MB.
+System memory in use after: 159.4 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 2278.
+Total: 2.439167 ms (FindLiveObjects: 0.214569 ms CreateObjectMapping: 0.080604 ms MarkObjects: 2.000953 ms  DeleteObjects: 0.142008 ms)
+
