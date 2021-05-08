@@ -8,7 +8,7 @@ public class CreatureData : MonoBehaviour
         Debug.Log("creature data");    
     }
 
-    public Hashtable getStatus(int level, bool isEnergyType) {
+    public Hashtable getStatus(int level, bool isEnergyType, bool isAlone) {
         Hashtable data = new Hashtable();
         if (isEnergyType) {
             data.Add("isEnergyType", 1);
@@ -32,6 +32,16 @@ public class CreatureData : MonoBehaviour
                 data.Add("attackPoint", 15);
                 data.Add("armour", 15);
                 data.Add("magicResistance", 15);
+                data.Add("isCarryType", 0);
+            } else if (level == 3 && isAlone) {
+                Debug.Log("get Pegasus");
+                data.Add("name", "Pegasus");
+                data.Add("healthPoint", 12);
+                data.Add("magicPoint", 12);
+                data.Add("attackDamage", 12);
+                data.Add("attackPoint", 12);
+                data.Add("armour", 12);
+                data.Add("magicResistance", 12);
                 data.Add("isCarryType", 0);
             } else if (level == 3) {
                 Debug.Log("get Mithril");
@@ -58,8 +68,18 @@ public class CreatureData : MonoBehaviour
                 data.Add("magicResistance", 12);
                 data.Add("isCarryType", 1);
             } else if (level == 2) {
-                Debug.Log("get aaaa");
-                data.Add("name", "aaaa");
+                Debug.Log("get Obake");
+                data.Add("name", "Obake");
+                data.Add("healthPoint", 15);
+                data.Add("magicPoint", 15);
+                data.Add("attackDamage", 15);
+                data.Add("attackPoint", 15);
+                data.Add("armour", 15);
+                data.Add("magicResistance", 15);
+                data.Add("isCarryType", 0);
+            } else if (level == 3 && isAlone) {
+                Debug.Log("get Dragon");
+                data.Add("name", "Dragon");
                 data.Add("healthPoint", 15);
                 data.Add("magicPoint", 15);
                 data.Add("attackDamage", 15);
@@ -68,8 +88,8 @@ public class CreatureData : MonoBehaviour
                 data.Add("magicResistance", 15);
                 data.Add("isCarryType", 0);
             } else if (level == 3) {
-                Debug.Log("get aaa");
-                data.Add("name", "aaa");
+                Debug.Log("get Death");
+                data.Add("name", "Death");
                 data.Add("healthPoint", 15);
                 data.Add("magicPoint", 15);
                 data.Add("attackDamage", 15);

@@ -8,6 +8,9 @@ public class DungeonController : MonoBehaviour
     public GameObject energyPrefab;
     public GameObject magicPrefab;
     public GameObject medamaPrefab;
+    public GameObject obakePrefab;
+    public GameObject deathPrefab;
+    public GameObject dragonPrefab;
     public GameObject mithrilPrefab;
     public GameObject pegasusPrefab;
     public GameObject enemyPrefab;
@@ -58,6 +61,7 @@ public class DungeonController : MonoBehaviour
 
             if (createCreature) {
                 bool isEnergyType = blockEnergyAmount >= blockMagicAmount;
+                bool isAlone = !aroundBlock(position[0], position[1]);
                 int carryingAmount = Mathf.Max(blockEnergyAmount, blockMagicAmount);
                 GameObject newCreature = enemyPrefab;
                 if (isEnergyType) {
@@ -65,7 +69,7 @@ public class DungeonController : MonoBehaviour
                         newCreature = Instantiate(energyPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 2) {
                         newCreature = Instantiate(medamaPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
-                    } else if (blockLevel == 3 && !aroundBlock(position[0],position[1])) {
+                    } else if (blockLevel == 3 && isAlone) {
                         newCreature = Instantiate(pegasusPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 3) {
                         newCreature = Instantiate(mithrilPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
@@ -74,13 +78,15 @@ public class DungeonController : MonoBehaviour
                     if (blockLevel == 1) {
                         newCreature = Instantiate(magicPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 2) {
-                        newCreature = Instantiate(medamaPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                        newCreature = Instantiate(obakePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    } else if (blockLevel == 3 && isAlone) {
+                        newCreature = Instantiate(dragonPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 3) {
-                        newCreature = Instantiate(mithrilPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                        newCreature = Instantiate(deathPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     }
                 }
                 CreatureController creatureController = newCreature.GetComponent<CreatureController>();
-                creatureController.setCreatureStatus(blockLevel, carryingAmount, isEnergyType, blockEnergyAmount, blockMagicAmount);
+                creatureController.setCreatureStatus(blockLevel, carryingAmount, isEnergyType, blockEnergyAmount, blockMagicAmount, isAlone);
             }
         } else {
             // 消す
