@@ -69,6 +69,8 @@ public class CreatureController : MonoBehaviour
             initalizeWalkedMap();
         }
         beforePosition = currentPosition();
+
+        direction = randomDirection();
     }
 
     void FixedUpdate() {
