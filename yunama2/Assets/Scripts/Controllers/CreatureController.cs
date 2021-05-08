@@ -384,7 +384,7 @@ public class CreatureController : MonoBehaviour
         }
     }
 
-    public void setCreatureStatus(int level,  int carrying_amount, bool is_Energy_Type) {
+    public void setCreatureStatus(int level,  int carrying_amount, bool is_Energy_Type, int energy_amount, int magic_amount) {
         creatureDataGO = GameObject.Find("CreatureData");
         creatureData = creatureDataGO.GetComponent<CreatureData>();
 
@@ -397,8 +397,8 @@ public class CreatureController : MonoBehaviour
         attackPoint = (int)data["attackPoint"];
         armour = (int)data["armour"];
         magicResistance = (int)data["magicResistance"];
-        energyAmount = (int)data["energyAmount"];
-        magicAmount = (int)data["magicAmount"];
+        energyAmount = energy_amount;
+        magicAmount = magic_amount;
 
         isCarryType = (int)data["isCarryType"] == 1;
         isEnergyType = (int)data["isEnergyType"] == 1;

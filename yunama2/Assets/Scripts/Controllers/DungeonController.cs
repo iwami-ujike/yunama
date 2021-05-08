@@ -80,7 +80,7 @@ public class DungeonController : MonoBehaviour
                     }
                 }
                 CreatureController creatureController = newCreature.GetComponent<CreatureController>();
-                creatureController.setCreatureStatus(blockLevel, carryingAmount, isEnergyType);
+                creatureController.setCreatureStatus(blockLevel, carryingAmount, isEnergyType, blockEnergyAmount, blockMagicAmount);
             }
         } else {
             // 消す

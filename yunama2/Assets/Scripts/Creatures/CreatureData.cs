@@ -22,8 +22,6 @@ public class CreatureData : MonoBehaviour
                 data.Add("attackPoint", 12);
                 data.Add("armour", 12);
                 data.Add("magicResistance", 12);
-                data.Add("energyAmount", 12);
-                data.Add("magicAmount", 12);
                 data.Add("isCarryType", 1);
             } else if (level == 2) {
                 Debug.Log("get Medama");
@@ -34,8 +32,6 @@ public class CreatureData : MonoBehaviour
                 data.Add("attackPoint", 15);
                 data.Add("armour", 15);
                 data.Add("magicResistance", 15);
-                data.Add("energyAmount", 15);
-                data.Add("magicAmount", 15);
                 data.Add("isCarryType", 0);
             } else if (level == 3) {
                 Debug.Log("get Mithril");
@@ -46,8 +42,6 @@ public class CreatureData : MonoBehaviour
                 data.Add("attackPoint", 12);
                 data.Add("armour", 12);
                 data.Add("magicResistance", 12);
-                data.Add("energyAmount", 12);
-                data.Add("magicAmount", 12);
                 data.Add("isCarryType", 0);
             }
         } else { // magic type
@@ -62,8 +56,6 @@ public class CreatureData : MonoBehaviour
                 data.Add("attackPoint", 12);
                 data.Add("armour", 12);
                 data.Add("magicResistance", 12);
-                data.Add("energyAmount", 12);
-                data.Add("magicAmount", 12);
                 data.Add("isCarryType", 1);
             } else if (level == 2) {
                 Debug.Log("get aaaa");
@@ -74,8 +66,6 @@ public class CreatureData : MonoBehaviour
                 data.Add("attackPoint", 15);
                 data.Add("armour", 15);
                 data.Add("magicResistance", 15);
-                data.Add("energyAmount", 15);
-                data.Add("magicAmount", 15);
                 data.Add("isCarryType", 0);
             } else if (level == 3) {
                 Debug.Log("get aaa");
@@ -86,8 +76,6 @@ public class CreatureData : MonoBehaviour
                 data.Add("attackPoint", 15);
                 data.Add("armour", 15);
                 data.Add("magicResistance", 15);
-                data.Add("energyAmount", 15);
-                data.Add("magicAmount", 15);
                 data.Add("isCarryType", 0);
             }
         }
