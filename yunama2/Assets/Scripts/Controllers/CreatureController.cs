@@ -39,7 +39,7 @@ public class CreatureController : MonoBehaviour
     [SerializeField] bool attacking = false;
 
     [SerializeField] float timer = 0;
-    [SerializeField] float waitNextActionTime = 0.2f;
+    [SerializeField] float waitNextActionTime = 0.5f;
     [SerializeField] float waitDrainTime = 1.2f;
     [SerializeField] float waitDeliverTime = 1.2f;
 
@@ -65,7 +65,7 @@ public class CreatureController : MonoBehaviour
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
 
         animator = GetComponent<Animator>();
-        if (isCarryType) {
+        if (!isCarryType) {
             initalizeWalkedMap();
         }
         beforePosition = currentPosition();
@@ -140,7 +140,7 @@ public class CreatureController : MonoBehaviour
             }
         } else if(!draining && !delivering) {
             if (checkIfNonEmptyBlockAvailable) {
-                exchangeEnergyOrMagic(true, !carrying);
+                exchangeEnergyOrMagic(isEnergyType, !carrying);
             }
             setcheckIfNonEmptyBlockAvailable();
         }
@@ -382,11 +382,11 @@ public class CreatureController : MonoBehaviour
         }
     }
 
-    public void setCreatureStatus(int level,  int carrying_amount, bool isEnergyType) {
+    public void setCreatureStatus(int level,  int carrying_amount, bool is_Energy_Type) {
         creatureDataGO = GameObject.Find("CreatureData");
         creatureData = creatureDataGO.GetComponent<CreatureData>();
 
-        Hashtable data = creatureData.getStatus(level, isEnergyType);
+        Hashtable data = creatureData.getStatus(level, is_Energy_Type);
 
         name = data["name"].ToString();
         healthPoint = (int)data["healthPoint"];
@@ -400,6 +400,7 @@ public class CreatureController : MonoBehaviour
 
         isCarryType = (int)data["isCarryType"] == 1;
         isEnergyType = (int)data["isEnergyType"] == 1;
+        Debug.Log((int)data["isEnergyType"]);
 
         if (isCarryType) {
             carryingAmount = carrying_amount;

@@ -64,10 +64,12 @@ public class DungeonController : MonoBehaviour
                     if (blockLevel == 1) {
                         newCreature = Instantiate(energyPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 2) {
+                        newCreature = Instantiate(medamaPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    } else if (blockLevel == 3 && !aroundBlock(position[0],position[1])) {
                         newCreature = Instantiate(pegasusPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 3) {
-                        newCreature = Instantiate(pegasusPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
-                    }
+                        newCreature = Instantiate(mithrilPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    } 
                 } else {
                     if (blockLevel == 1) {
                         newCreature = Instantiate(magicPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);

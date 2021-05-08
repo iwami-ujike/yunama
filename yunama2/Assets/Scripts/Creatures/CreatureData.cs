@@ -26,8 +26,8 @@ public class CreatureData : MonoBehaviour
                 data.Add("magicAmount", 12);
                 data.Add("isCarryType", 1);
             } else if (level == 2) {
-                Debug.Log("get Pegasus");
-                data.Add("name", "Pegasus");
+                Debug.Log("get Medama");
+                data.Add("name", "Medama");
                 data.Add("healthPoint", 15);
                 data.Add("magicPoint", 15);
                 data.Add("attackDamage", 15);
@@ -38,8 +38,8 @@ public class CreatureData : MonoBehaviour
                 data.Add("magicAmount", 15);
                 data.Add("isCarryType", 0);
             } else if (level == 3) {
-                Debug.Log("get aaaa");
-                data.Add("name", "aaaa");
+                Debug.Log("get Mithril");
+                data.Add("name", "Mithril");
                 data.Add("healthPoint", 12);
                 data.Add("magicPoint", 12);
                 data.Add("attackDamage", 12);
@@ -66,8 +66,8 @@ public class CreatureData : MonoBehaviour
                 data.Add("magicAmount", 12);
                 data.Add("isCarryType", 1);
             } else if (level == 2) {
-                Debug.Log("get Medama");
-                data.Add("name", "Medama");
+                Debug.Log("get aaaa");
+                data.Add("name", "aaaa");
                 data.Add("healthPoint", 15);
                 data.Add("magicPoint", 15);
                 data.Add("attackDamage", 15);
@@ -78,8 +78,8 @@ public class CreatureData : MonoBehaviour
                 data.Add("magicAmount", 15);
                 data.Add("isCarryType", 0);
             } else if (level == 3) {
-                Debug.Log("get Mithril");
-                data.Add("name", "Mithril");
+                Debug.Log("get aaa");
+                data.Add("name", "aaa");
                 data.Add("healthPoint", 15);
                 data.Add("magicPoint", 15);
                 data.Add("attackDamage", 15);
