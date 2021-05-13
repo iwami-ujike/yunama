@@ -1,0 +1,381 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.3f1 (76626098c1c4) revision 7758432'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19041.928; Version 2004; 64bit' Language: 'ja' Physical Memory: 16301 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.3f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/Users/Unity_ft/yunama/yunama2
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+51772
+Successfully changed project path to: D:/Users/Unity_ft/yunama/yunama2
+D:/Users/Unity_ft/yunama/yunama2
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 28.75 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.3f1 (76626098c1c4)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Users/Unity_ft/yunama/yunama2/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2070 (ID=0x1f02)
+    Vendor:   
+    VRAM:     8031 MB
+    Driver:   27.21.14.6611
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56248
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.3f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001214 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 28.79 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.815 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.000624 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 29.48 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.723 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 0.29 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1817 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 99.7 MB.
+System memory in use after: 99.6 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 2275.
+Total: 1.731100 ms (FindLiveObjects: 0.147300 ms CreateObjectMapping: 0.066500 ms MarkObjects: 1.419100 ms  DeleteObjects: 0.097500 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png
+  artifactKey: Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png using Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6e1e9f6a3cb87654877f7113661f507') in 0.098375 seconds
+  Import took 0.100712 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000153 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Drain_Io_2.png
+  artifactKey: Guid(f0207565ef80dcd41a8428c7ec8927d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Drain_Io_2.png using Guid(f0207565ef80dcd41a8428c7ec8927d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9acbe13d5cd55ce34c76624d6f41fe9d') in 0.007121 seconds
+  Import took 0.009311 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.131521 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png
+  artifactKey: Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png using Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f82356c034b3f95006e7631505e756c') in 0.008266 seconds
+  Import took 0.010833 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.900065 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png
+  artifactKey: Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png using Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2cd126c74f44092e52a208f4b5a1766') in 0.003551 seconds
+  Import took 0.005858 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002213 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png
+  artifactKey: Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png using Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2cd126c74f44092e52a208f4b5a1766') in 0.003806 seconds
+  Import took 0.006133 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.804975 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Drain_Io_2.png
+  artifactKey: Guid(f0207565ef80dcd41a8428c7ec8927d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Drain_Io_2.png using Guid(f0207565ef80dcd41a8428c7ec8927d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '456d30ef2c2d20be43fbc53b9a565901') in 0.008429 seconds
+  Import took 0.010866 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.304167 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png
+  artifactKey: Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Drain_Io_1.png using Guid(d355a0fbc8310374498e4adfa467f849) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37169ec3719ac6fb4177bfd66ad917fa') in 0.009429 seconds
+  Import took 0.011945 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 58.532800 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/IO.controller
+  artifactKey: Guid(d3c59fe6222c2d347a51e605548dbf06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/IO.controller using Guid(d3c59fe6222c2d347a51e605548dbf06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2ac969291a758875e4781819526d2c8') in 0.005688 seconds
+  Import took 0.008440 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000965 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/IO.controller
+  artifactKey: Guid(d3c59fe6222c2d347a51e605548dbf06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/IO.controller using Guid(d3c59fe6222c2d347a51e605548dbf06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2ac969291a758875e4781819526d2c8') in 0.002075 seconds
+  Import took 0.004556 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 109.535018 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Io Down.anim
+  artifactKey: Guid(89cb56da00d906e42b1dd2ccdf2384cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Io Down.anim using Guid(89cb56da00d906e42b1dd2ccdf2384cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84638da9cf95b54d96e139a695f2250f') in 0.005699 seconds
+  Import took 0.008299 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000510 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Io Down.anim
+  artifactKey: Guid(89cb56da00d906e42b1dd2ccdf2384cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Io Down.anim using Guid(89cb56da00d906e42b1dd2ccdf2384cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84638da9cf95b54d96e139a695f2250f') in 0.001575 seconds
+  Import took 0.003825 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.712606 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Io_Deliver_Magic.anim
+  artifactKey: Guid(b371f25bf0ff0aa46b1e1e296fe23823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Io_Deliver_Magic.anim using Guid(b371f25bf0ff0aa46b1e1e296fe23823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd9261e2d9e7c63bab3252cac6f1897ac') in 0.004603 seconds
+  Import took 0.006962 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.905978 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/Io_Drain_Magic.anim
+  artifactKey: Guid(4f76325ad9aaa1b49ba3fa350b48ce34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/Io_Drain_Magic.anim using Guid(4f76325ad9aaa1b49ba3fa350b48ce34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6aa1c01dbf8a3281f5592b5cb1746815') in 0.004329 seconds
+  Import took 0.006677 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000614 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.35 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.634 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.29 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 102.7 MB.
+System memory in use after: 102.7 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2285.
+Total: 1.628100 ms (FindLiveObjects: 0.145500 ms CreateObjectMapping: 0.056300 ms MarkObjects: 1.342700 ms  DeleteObjects: 0.082900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000604 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.29 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.626 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.30 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 102.8 MB.
+System memory in use after: 102.7 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2289.
+Total: 2.001600 ms (FindLiveObjects: 0.267800 ms CreateObjectMapping: 0.113600 ms MarkObjects: 1.477200 ms  DeleteObjects: 0.140800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000640 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.29 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.658 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 102.8 MB.
+System memory in use after: 102.8 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2293.
+Total: 1.684800 ms (FindLiveObjects: 0.144700 ms CreateObjectMapping: 0.053100 ms MarkObjects: 1.392500 ms  DeleteObjects: 0.093800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 437.400273 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DeliverIo_1.png
+  artifactKey: Guid(5c36123999cb0114aa61438c2cd0a538) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DeliverIo_1.png using Guid(5c36123999cb0114aa61438c2cd0a538) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '769958b24ad364dc700d06d2709ea36c') in 0.043245 seconds
+  Import took 0.045681 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000225 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DeliverIo_2.png
+  artifactKey: Guid(3f46d02606123764a9555caa31238b19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DeliverIo_2.png using Guid(3f46d02606123764a9555caa31238b19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc194d8dcd98e83d74b418275051d1e9') in 0.006498 seconds
+  Import took 0.008621 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000206 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DrainIo_2.png
+  artifactKey: Guid(1619cd66723159545a3162c69ef927d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DrainIo_2.png using Guid(1619cd66723159545a3162c69ef927d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64381d74fee7638428bacef1c83fd765') in 0.006305 seconds
+  Import took 0.008408 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000206 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DrainIo_1.png
+  artifactKey: Guid(9484b59afafed9a43a189aef668b18f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DrainIo_1.png using Guid(9484b59afafed9a43a189aef668b18f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '005cb7670f57a68173ec9babc268bb01') in 0.006158 seconds
+  Import took 0.008331 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 25.233409 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DeliverIo_1.png
+  artifactKey: Guid(5c36123999cb0114aa61438c2cd0a538) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DeliverIo_1.png using Guid(5c36123999cb0114aa61438c2cd0a538) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '486021fd7a36b1e202bc413941e41186') in 0.028833 seconds
+  Import took 0.031197 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.638076 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DeliverIo_2.png
+  artifactKey: Guid(3f46d02606123764a9555caa31238b19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DeliverIo_2.png using Guid(3f46d02606123764a9555caa31238b19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9ac9934c6291bfa72c7d08b6f4f06c3') in 0.026136 seconds
+  Import took 0.028573 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.998427 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DrainIo_1.png
+  artifactKey: Guid(9484b59afafed9a43a189aef668b18f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DrainIo_1.png using Guid(9484b59afafed9a43a189aef668b18f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f05e751a9d5624d2b492df7e6d4171e7') in 0.008766 seconds
+  Import took 0.011277 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.429447 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DrainIo_2.png
+  artifactKey: Guid(1619cd66723159545a3162c69ef927d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DrainIo_2.png using Guid(1619cd66723159545a3162c69ef927d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ccd06e25a16785f175f17a79c5eb481a') in 0.008217 seconds
+  Import took 0.010605 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000664 seconds.
+  path: Assets/Animations/CreaureSprites/IOSprites/DrainIo_2.png
+  artifactKey: Guid(1619cd66723159545a3162c69ef927d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/CreaureSprites/IOSprites/DrainIo_2.png using Guid(1619cd66723159545a3162c69ef927d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ccd06e25a16785f175f17a79c5eb481a') in 0.017060 seconds
+  Import took 0.019463 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000609 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.648 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.30 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 102.8 MB.
+System memory in use after: 102.8 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2298.
+Total: 1.634800 ms (FindLiveObjects: 0.146200 ms CreateObjectMapping: 0.053300 ms MarkObjects: 1.350600 ms  DeleteObjects: 0.084100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000641 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.30 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.631 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(9) subTarget(16777218) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.33 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1815 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 102.8 MB.
+System memory in use after: 102.8 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2302.
+Total: 1.675600 ms (FindLiveObjects: 0.181900 ms CreateObjectMapping: 0.064100 ms MarkObjects: 1.333100 ms  DeleteObjects: 0.095800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
