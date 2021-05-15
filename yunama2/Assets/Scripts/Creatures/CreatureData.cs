@@ -16,12 +16,12 @@ public class CreatureData : MonoBehaviour
             if (level == 1) {
                 Debug.Log("get yukiusagi");
                 data.Add("name", "Yukiusagi");
-                data.Add("healthPoint", 12);
+                data.Add("healthPoint", 21);
                 data.Add("magicPoint", 12);
-                data.Add("attackDamage", 12);
+                data.Add("attackDamage", 13);
                 data.Add("attackPoint", 12);
-                data.Add("armour", 12);
-                data.Add("magicResistance", 12);
+                data.Add("armour", 2);
+                data.Add("magicResistance", 0);
                 data.Add("isCarryType", 1);
             } else if (level == 2) {
                 Debug.Log("get Medama");

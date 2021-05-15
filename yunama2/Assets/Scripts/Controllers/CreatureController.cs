@@ -14,7 +14,7 @@ public class CreatureController : MonoBehaviour
     [SerializeField] int magicPoint = 10;
     [SerializeField] int attackDamage = 10;
     [SerializeField] int attackPoint = 10;
-    [SerializeField] int armour = 10;
+    public int armour = 10;
     [SerializeField] int magicResistance = 10;
     [SerializeField] int energyAmount = 10;
     [SerializeField] int magicAmount = 10;
@@ -43,14 +43,19 @@ public class CreatureController : MonoBehaviour
     [SerializeField] float waitDrainTime = 1.2f;
     [SerializeField] float waitDeliverTime = 1.2f;
 
+    [SerializeField] bool isFight = false;
+    int currentHP;
+
     public int[,] walkedMap;
 
     [SerializeField] int[] beforePosition;
 
     GameObject cursor;
     GameObject dungeonControllerGO;
+    GameObject enemy;
     CursorController cursorController;
     DungeonController dungeonController;
+    EnemyController enemyController;
     
     [SerializeField] GameObject creatureDataGO;
     [SerializeField] CreatureData creatureData;
@@ -60,9 +65,11 @@ public class CreatureController : MonoBehaviour
     void Start() {
         cursor = GameObject.Find("Cursor");
         dungeonControllerGO = GameObject.Find("DungeonController");
+        enemy = GameObject.Find("Enemy");
 
         cursorController = cursor.GetComponent<CursorController>();
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
+        enemyController = enemy.GetComponent<EnemyController>();
 
         animator = GetComponent<Animator>();
         if (!isCarryType) {
@@ -71,6 +78,7 @@ public class CreatureController : MonoBehaviour
         beforePosition = currentPosition();
 
         direction = randomDirection();
+        currentHP = healthPoint;
     }
 
     void FixedUpdate() {
@@ -148,7 +156,22 @@ public class CreatureController : MonoBehaviour
     }
 
     void attack() {
+        int damage = Mathf.Max(attackDamage - enemyController.armour,0);
+        if (attacking) {
+            if (isFight) {
 
+            }
+            enemyController.gotDamaged(damage);
+        }
+        attacking = false;
+    }
+
+    public void gotDamaged(int damage) {
+        currentHP = Mathf.Max(currentHP - damage, 0);
+        Debug.Log(currentHP);
+        if (currentHP == 0) {
+            Destroy(gameObject);
+        }
     }
 
     void changeDirection() {
@@ -420,6 +443,16 @@ public class CreatureController : MonoBehaviour
             for (int j=wallThickness; j<mapWidth+wallThickness; j++) {
                 walkedMap[i,j] = 0;
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("trigger");
+        Debug.Log("Col" + other.gameObject.tag);
+        if (other.tag == "Enemy") {
+            attacking = true;
+            isFight = true;
+            attack();
         }
     }
 }

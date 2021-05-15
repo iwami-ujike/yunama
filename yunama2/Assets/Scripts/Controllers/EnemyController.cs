@@ -10,19 +10,22 @@ public class EnemyController : MonoBehaviour
     [SerializeField] bool willChangeDirection = false;
     [SerializeField] bool changingDirection = false;
 
-    [SerializeField] int healthPoint = 10;
-    [SerializeField] int magicPoint = 10;
-    [SerializeField] int attackDamage = 10;
+    [SerializeField] int healthPoint = 28;
+    [SerializeField] int magicPoint = 20;
+    [SerializeField] int attackDamage = 7;
     [SerializeField] int attackPoint = 10;
-    [SerializeField] int armour = 10;
-    [SerializeField] int magicResistance = 10;
-    [SerializeField] int energyAmount = 10;
-    [SerializeField] int magicAmount = 10;
+    public int armour = 9;
+    [SerializeField] int magicResistance = 0;
+    [SerializeField] int energyAmount = 15;
+    //magicAmountとmagicPointを共通の値に変えました。
 
     [SerializeField] bool waitNextAction = false;
 
     [SerializeField] bool attacking = false;
     [SerializeField] bool kidnapping = false;
+    [SerializeField] bool isCreature = true;
+    
+    public int currentHP;
 
     float timer = 0;
     float waitNextActionTime = 0.5f;
@@ -35,8 +38,10 @@ public class EnemyController : MonoBehaviour
 
     GameObject cursor;
     GameObject dungeonControllerGO;
+    GameObject creature;
     CursorController cursorController;
     DungeonController dungeonController;
+    CreatureController creatureController;
 
     Animator animator;
 
@@ -50,6 +55,7 @@ public class EnemyController : MonoBehaviour
 
         initalizeWalkedMap();
         beforePosition = currentPosition();
+        currentHP = healthPoint;
     }
 
     void FixedUpdate() {
@@ -72,10 +78,27 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("Move Y", -1);
             animator.SetFloat("Move X", 0);
         }
+
+        if (creature = GameObject.Find("Yukiusagi")) {
+            creatureController = creature.GetComponent<CreatureController>();
+        }
     }
 
     void attack() {
+        int damage = Mathf.Max(attackDamage - creatureController.armour,0);
+        if (attacking) {
+            speed = 0;
+            creatureController.gotDamaged(damage);
+        }
+        attacking = false;
+    }
 
+    public void gotDamaged(int damage) {
+        currentHP = Mathf.Max(currentHP - damage, 0);
+        Debug.Log(currentHP);
+        if (currentHP == 0) {
+            Destroy(gameObject);
+        }
     }
 
     void changeDirection() {
@@ -179,8 +202,10 @@ public class EnemyController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("trigger");
-        Debug.Log(other.gameObject.name);
+        Debug.Log("Col" + other.gameObject.tag);
         if (other.tag == "Creature") {
+            attacking = true;
+            attack();
         }
     }
 }
