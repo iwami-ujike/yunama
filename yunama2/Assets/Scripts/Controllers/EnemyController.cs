@@ -176,5 +176,12 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("trigger");
+        Debug.Log(other.gameObject.name);
+        if (other.tag == "Creature") {
+        }
+    }
 }
 

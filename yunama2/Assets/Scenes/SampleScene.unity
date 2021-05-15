@@ -1217,13 +1217,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 323781665106014578, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196713, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196713, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196713, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_IsActive
@@ -1271,6 +1275,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196716, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344553641159196722, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344553641159196722, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344553641159196722, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344553641159196722, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
+      propertyPath: m_EdgeRadius
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4476826838433583541, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
@@ -1454,11 +1474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2155856106934520493, guid: bcb0639ae56cb484e87a549faeb7dd41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34.5
+      value: 43.54
       objectReference: {fileID: 0}
     - target: {fileID: 2155856106934520493, guid: bcb0639ae56cb484e87a549faeb7dd41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.5
+      value: 2.19
       objectReference: {fileID: 0}
     - target: {fileID: 2155856106934520493, guid: bcb0639ae56cb484e87a549faeb7dd41, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1709,8 +1729,8 @@ MonoBehaviour:
   pegasusPrefab: {fileID: 788467741969611289, guid: 60d553d84c6e2c040b0159233bec8f80, type: 3}
   enemyPrefab: {fileID: 2344553641159196713, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
   details_object: {fileID: 1887442548}
-  mapWidth: 59
-  mapHeight: 45
+  mapWidth: 71
+  mapHeight: 51
   wallThickness: 5
   randomEmptyRange: 7
   randomEnergyAmountRange: 10
