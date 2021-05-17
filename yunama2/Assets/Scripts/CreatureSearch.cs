@@ -11,10 +11,10 @@ public class CreatureSearch : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         //敵が入ってきたかどうか判定する
-        Debug.Log("Col" + other.gameObject.tag);
         if (other.tag == "Enemy") {
             //範囲内に敵がいたら攻撃メソッドを呼び出す。
-            creatureController.attack();
+            creatureController.attacking = true;
+            creatureController.enemyController = other.GetComponent<EnemyController>();
         }
     }
 }

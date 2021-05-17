@@ -21,10 +21,10 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] bool waitNextAction = false;
 
-    [SerializeField] bool attacking = false;
+    public bool attacking = false;
     [SerializeField] bool kidnapping = false;
     
-    [SerializeField] float timeElapsed = 0;
+    
     [SerializeField] float waitNextAttack = 2f;
     [SerializeField] int currentHP;
 
@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
     GameObject creature;
     CursorController cursorController;
     DungeonController dungeonController;
-    CreatureController creatureController;
+    public CreatureController creatureController;
 
     Animator animator;
 
@@ -79,26 +79,22 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("Move Y", -1);
             animator.SetFloat("Move X", 0);
         }
-
-        if (creature = GameObject.Find("Yukiusagi")) {
-            creatureController = creature.GetComponent<CreatureController>();
-        }
-        timeElapsed += Time.deltaTime;
-        
-        if (timeElapsed >= waitNextAttack) {
-            Debug.Log("Damage");
-            attacking = true;
-            attack();
-            timeElapsed = 0.0f;
-        }
     }
 
     public void attack() {
-        int damage = Mathf.Max(attackDamage - creatureController.armour,0);
-        if (attacking) {
-            creatureController.gotDamaged(damage);
+        if (attacking) { 
+            timer += Time.deltaTime;
+            if (creatureController != null) {
+                if (timer >= waitNextAttack) {
+                    int damage = Mathf.Max(attackDamage - creatureController.armour,0);
+                    creatureController.gotDamaged(damage);
+                    timer = 0;
+                }
+            } else {
+                attacking = false;
+                timer = 0;
+            }
         }
-        attacking = false;
     }
 
     public void gotDamaged(int damage) {

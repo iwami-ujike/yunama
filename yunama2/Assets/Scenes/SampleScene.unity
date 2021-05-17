@@ -1231,7 +1231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196713, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196716, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_RootOrder
@@ -1239,11 +1239,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196716, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.27
+      value: 43.32
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196716, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.29
+      value: 3.98
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196716, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1301,17 +1301,21 @@ PrefabInstance:
       propertyPath: magicResistance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2344553641159196718, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
+      propertyPath: creatureController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196722, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196722, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_Size.y
-      value: 2
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196722, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2344553641159196722, guid: 17378ed6a20cb42d29ed6bedfa36b452, type: 3}
       propertyPath: m_EdgeRadius

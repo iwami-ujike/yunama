@@ -36,14 +36,13 @@ public class CreatureController : MonoBehaviour
     [SerializeField] bool carrying = false;
     [SerializeField] bool draining = false;
     [SerializeField] bool delivering = false;
-    [SerializeField] bool attacking = false;
+    public bool attacking = false;
 
     [SerializeField] float timer = 0;
     [SerializeField] float waitNextActionTime = 0.5f;
     [SerializeField] float waitDrainTime = 1.2f;
     [SerializeField] float waitDeliverTime = 1.2f;
 
-    [SerializeField] float timeElapsed = 0;
     [SerializeField] float waitNextAttack = 2f;
     [SerializeField] int currentHP;
 
@@ -53,10 +52,10 @@ public class CreatureController : MonoBehaviour
 
     GameObject cursor;
     GameObject dungeonControllerGO;
-    GameObject enemy;
+
     CursorController cursorController;
     DungeonController dungeonController;
-    EnemyController enemyController;
+    public EnemyController enemyController;
     
     [SerializeField] GameObject creatureDataGO;
     [SerializeField] CreatureData creatureData;
@@ -116,20 +115,6 @@ public class CreatureController : MonoBehaviour
             animator.SetBool("Delivering",delivering);
             animator.SetBool("isCarrying",carrying);
         }
-
-        if (enemy = GameObject.Find("Enemy")) {
-            enemyController = enemy.GetComponent<EnemyController>();
-        }
-
-        //アタックスピードを定義して攻撃を繰り返す
-        timeElapsed += Time.deltaTime;
-        
-        if (timeElapsed >= waitNextAttack) {
-            Debug.Log("Damage");
-            attacking = true;
-            attack();
-            timeElapsed = 0.0f;
-        }
     }
 
     void waitDrain() {
@@ -169,11 +154,21 @@ public class CreatureController : MonoBehaviour
     }
 
     public void attack() {
-        int damage = Mathf.Max(attackDamage - enemyController.armour,0);
         if (attacking) { 
-            enemyController.gotDamaged(damage);
+            timer += Time.deltaTime;
+            if (enemyController != null) {
+                draining = false;
+                delivering = false;
+                if (timer >= waitNextAttack) {
+                    int damage = Mathf.Max(attackDamage - enemyController.armour,0);
+                    enemyController.gotDamaged(damage);
+                    timer = 0;
+                }
+            } else {
+                attacking = false;
+                timer = 0;
+            }
         }
-        attacking = false;
     }
 
     public void gotDamaged(int damage) {

@@ -113,10 +113,10 @@ MonoBehaviour:
   waitNextAction: 0
   attacking: 0
   kidnapping: 0
-  timeElapsed: 0
   waitNextAttack: 2
   currentHP: 0
   beforePosition: 
+  creatureController: {fileID: 0}
 --- !u!61 &2344553641159196722
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -193,6 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5260259259936493968}
   - component: {fileID: 7289177881055100257}
+  - component: {fileID: 4870086082620245077}
   m_Layer: 0
   m_Name: SearchArea
   m_TagString: Untagged
@@ -240,3 +241,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &4870086082620245077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160246423376585485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b8c87f63d08de4f96916530e1928be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
