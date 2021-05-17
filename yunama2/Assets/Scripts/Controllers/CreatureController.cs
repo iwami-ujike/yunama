@@ -43,8 +43,9 @@ public class CreatureController : MonoBehaviour
     [SerializeField] float waitDrainTime = 1.2f;
     [SerializeField] float waitDeliverTime = 1.2f;
 
-    [SerializeField] bool isFight = false;
-    int currentHP;
+    [SerializeField] float timeElapsed = 0;
+    [SerializeField] float waitNextAttack = 2f;
+    [SerializeField] int currentHP;
 
     public int[,] walkedMap;
 
@@ -65,11 +66,9 @@ public class CreatureController : MonoBehaviour
     void Start() {
         cursor = GameObject.Find("Cursor");
         dungeonControllerGO = GameObject.Find("DungeonController");
-        enemy = GameObject.Find("Enemy");
 
         cursorController = cursor.GetComponent<CursorController>();
         dungeonController = dungeonControllerGO.GetComponent<DungeonController>();
-        enemyController = enemy.GetComponent<EnemyController>();
 
         animator = GetComponent<Animator>();
         if (!isCarryType) {
@@ -117,6 +116,20 @@ public class CreatureController : MonoBehaviour
             animator.SetBool("Delivering",delivering);
             animator.SetBool("isCarrying",carrying);
         }
+
+        if (enemy = GameObject.Find("Enemy")) {
+            enemyController = enemy.GetComponent<EnemyController>();
+        }
+
+        //アタックスピードを定義して攻撃を繰り返す
+        timeElapsed += Time.deltaTime;
+        
+        if (timeElapsed >= waitNextAttack) {
+            Debug.Log("Damage");
+            attacking = true;
+            attack();
+            timeElapsed = 0.0f;
+        }
     }
 
     void waitDrain() {
@@ -155,12 +168,9 @@ public class CreatureController : MonoBehaviour
         }
     }
 
-    void attack() {
+    public void attack() {
         int damage = Mathf.Max(attackDamage - enemyController.armour,0);
-        if (attacking) {
-            if (isFight) {
-
-            }
+        if (attacking) { 
             enemyController.gotDamaged(damage);
         }
         attacking = false;
@@ -443,16 +453,6 @@ public class CreatureController : MonoBehaviour
             for (int j=wallThickness; j<mapWidth+wallThickness; j++) {
                 walkedMap[i,j] = 0;
             }
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("trigger");
-        Debug.Log("Col" + other.gameObject.tag);
-        if (other.tag == "Enemy") {
-            attacking = true;
-            isFight = true;
-            attack();
         }
     }
 }

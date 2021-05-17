@@ -17,15 +17,16 @@ public class EnemyController : MonoBehaviour
     public int armour = 9;
     [SerializeField] int magicResistance = 0;
     [SerializeField] int energyAmount = 15;
-    //magicAmountとmagicPointを共通の値に変えました。
+    //magicAmountとmagicPointを共通の値に変更しました。
 
     [SerializeField] bool waitNextAction = false;
 
     [SerializeField] bool attacking = false;
     [SerializeField] bool kidnapping = false;
-    [SerializeField] bool isCreature = true;
     
-    public int currentHP;
+    [SerializeField] float timeElapsed = 0;
+    [SerializeField] float waitNextAttack = 2f;
+    [SerializeField] int currentHP;
 
     float timer = 0;
     float waitNextActionTime = 0.5f;
@@ -82,12 +83,19 @@ public class EnemyController : MonoBehaviour
         if (creature = GameObject.Find("Yukiusagi")) {
             creatureController = creature.GetComponent<CreatureController>();
         }
+        timeElapsed += Time.deltaTime;
+        
+        if (timeElapsed >= waitNextAttack) {
+            Debug.Log("Damage");
+            attacking = true;
+            attack();
+            timeElapsed = 0.0f;
+        }
     }
 
-    void attack() {
+    public void attack() {
         int damage = Mathf.Max(attackDamage - creatureController.armour,0);
         if (attacking) {
-            speed = 0;
             creatureController.gotDamaged(damage);
         }
         attacking = false;
@@ -197,15 +205,6 @@ public class EnemyController : MonoBehaviour
             for (int j=wallThickness; j<mapWidth+wallThickness; j++) {
                 walkedMap[i,j] = 0;
             }
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("trigger");
-        Debug.Log("Col" + other.gameObject.tag);
-        if (other.tag == "Creature") {
-            attacking = true;
-            attack();
         }
     }
 }
