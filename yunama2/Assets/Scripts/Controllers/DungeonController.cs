@@ -176,10 +176,17 @@ public class DungeonController : MonoBehaviour
             details_text.text = text;
         } else if (gameObject.tag == "Creature") {
             CreatureController creatureController = gameObject.GetComponent<CreatureController>();
+            int healthPoint = creatureController.currentHP;
             eAmount = creatureController.getCarryingAmount();
-            text = "Name: " + gameObject.name + "\nEnergy: " + eAmount + "\n" + "Magic:  " + mAmount;
+            text = "Name: " + gameObject.name + "\nHealth: " + healthPoint + "\nEnergy: " + eAmount + "\n" + "Magic:  " + mAmount;
             details_text.text = text;
         }
 
+    }
+
+    public void objectKillTheCreature(GameObject gameObject) {
+        CreatureController creatureController = gameObject.GetComponent<CreatureController>();
+        int damage = Mathf.CeilToInt(creatureController.healthPoint * 0.3f);
+        creatureController.gotDamaged(damage);
     }
 }

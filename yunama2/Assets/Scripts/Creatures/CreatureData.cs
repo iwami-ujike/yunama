@@ -17,6 +17,7 @@ public class CreatureData : MonoBehaviour
                 Debug.Log("get yukiusagi");
                 data.Add("name", "Yukiusagi");
                 data.Add("healthPoint", 21);
+                data.Add("spawnHp",16);
                 data.Add("magicPoint", 12);
                 data.Add("attackDamage", 13);
                 data.Add("attackPoint", 12);

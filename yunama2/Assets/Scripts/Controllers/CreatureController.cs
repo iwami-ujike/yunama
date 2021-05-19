@@ -10,7 +10,9 @@ public class CreatureController : MonoBehaviour
     [SerializeField] bool willChangeDirection = false;
     [SerializeField] bool changingDirection = false;
 
-    [SerializeField] int healthPoint = 10;
+    public int healthPoint = 10;
+    [SerializeField] int spawnHp = 10;
+    public int currentHP;
     [SerializeField] int magicPoint = 10;
     [SerializeField] int attackDamage = 10;
     [SerializeField] int attackPoint = 10;
@@ -44,7 +46,6 @@ public class CreatureController : MonoBehaviour
     [SerializeField] float waitDeliverTime = 1.2f;
 
     [SerializeField] float waitNextAttack = 2f;
-    [SerializeField] int currentHP;
 
     public int[,] walkedMap;
 
@@ -76,12 +77,12 @@ public class CreatureController : MonoBehaviour
         beforePosition = currentPosition();
 
         direction = randomDirection();
-        currentHP = healthPoint;
+        currentHP = spawnHp;
     }
 
     void FixedUpdate() {
         if (isCarryType) {
-            if (draining) waitDrain();
+            if (draining) waitDrain();   
             else if (delivering) waitDeliver();
             else if (attacking) attack();
             else if (!changingDirection) {
@@ -413,6 +414,7 @@ public class CreatureController : MonoBehaviour
 
         name = data["name"].ToString();
         healthPoint = (int)data["healthPoint"];
+        spawnHp = (int) data["spawnHp"];
         magicPoint = (int)data["magicPoint"];
         attackDamage = (int)data["attackDamage"];
         attackPoint = (int)data["attackPoint"];

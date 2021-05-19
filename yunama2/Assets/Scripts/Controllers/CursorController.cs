@@ -65,6 +65,8 @@ public class CursorController : MonoBehaviour
 
         if (chosenObject != null) {
             dungeonController.destroyBlock(chosenObject);
+        } else if (chosenObject = GameObject.FindWithTag("Creature")) {
+            dungeonController.objectKillTheCreature(chosenObject);
         }
     }
 
@@ -73,13 +75,14 @@ public class CursorController : MonoBehaviour
 
         int x = (int)this.transform.position.x;
         int y = -Mathf.FloorToInt(this.transform.position.y);
-        chosenObject = GameObject.Find("Block_" + x + "_" + y);
+        // chosenObject = GameObject.Find("Block_" + x + "_" + y);
 
-        if (chosenObject != null) {
+        if (chosenObject = GameObject.Find("Block_" + x + "_" + y)) {
+            dungeonController.objectDetailsText(chosenObject);
+        } else if (chosenObject = GameObject.FindWithTag("Creature")) {
             dungeonController.objectDetailsText(chosenObject);
         }
     }
-
     void initalizeCursor() {
         // transform.scale = new Vector3(8, 7.8, 1);
     }
