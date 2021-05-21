@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] int attackPoint = 10;
     public int armour = 9;
     [SerializeField] int magicResistance = 0;
-    [SerializeField] int energyAmount = 15;
+    [SerializeField] int energyAmount = 0;
     //magicAmountとmagicPointを共通の値に変更しました。
 
     [SerializeField] bool waitNextAction = false;
@@ -86,7 +86,7 @@ public class EnemyController : MonoBehaviour
             timer += Time.deltaTime;
             if (creatureController != null) {
                 if (timer >= waitNextAttack) {
-                    int damage = Mathf.Max(attackDamage - creatureController.armour,0);
+                    int damage = Mathf.Max(attackDamage - creatureController.armour,1);
                     creatureController.gotDamaged(damage);
                     timer = 0;
                 }
@@ -98,9 +98,11 @@ public class EnemyController : MonoBehaviour
     }
 
     public void gotDamaged(int damage) {
+        int magicAmount = magicPoint;
         currentHP = Mathf.Max(currentHP - damage, 0);
         Debug.Log(currentHP);
         if (currentHP == 0) {
+            dungeonController.scatterEM((int)this.transform.position.x,(int)this.transform.position.y,energyAmount,magicAmount);
             Destroy(gameObject);
         }
     }

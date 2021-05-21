@@ -104,6 +104,8 @@ MonoBehaviour:
   willChangeDirection: 0
   changingDirection: 0
   healthPoint: 12
+  spawnHp: 10
+  currentHP: 0
   magicPoint: 12
   attackDamage: 12
   attackPoint: 12
@@ -131,7 +133,6 @@ MonoBehaviour:
   waitDrainTime: 1.2
   waitDeliverTime: 1.2
   waitNextAttack: 2
-  currentHP: 0
   beforePosition: 
   enemyController: {fileID: 0}
   creatureDataGO: {fileID: 0}

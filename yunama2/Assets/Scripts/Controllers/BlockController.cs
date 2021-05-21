@@ -72,15 +72,16 @@ public class BlockController : MonoBehaviour
     public int getLevel() {
         // lv0 0
         // lv1 1 - 9
-        // lv2 10 - 29
-        // lv3 30 -
+        // lv2 10 - 16
+        // lv3 17 - 29
+        // lv4 30
         if (energyAmount == 0 && magicAmount == 0) 
             return 0;
         else if(Mathf.Max(energyAmount, magicAmount) <= 9)
             return 1;
-        else if(Mathf.Max(energyAmount, magicAmount) <= 29)
+        else if(Mathf.Max(energyAmount, magicAmount) <= 16)
             return 2;
-        else 
+        else
             return 3;
     }
 

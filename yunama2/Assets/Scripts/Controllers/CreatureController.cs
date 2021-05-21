@@ -13,7 +13,6 @@ public class CreatureController : MonoBehaviour
     public int healthPoint = 10;
     [SerializeField] int spawnHp = 10;
     public int currentHP;
-    [SerializeField] int magicPoint = 10;
     [SerializeField] int attackDamage = 10;
     [SerializeField] int attackPoint = 10;
     public int armour = 10;
@@ -176,6 +175,7 @@ public class CreatureController : MonoBehaviour
         currentHP = Mathf.Max(currentHP - damage, 0);
         Debug.Log(currentHP);
         if (currentHP == 0) {
+            dungeonController.scatterEM((int)this.transform.position.x,(int)this.transform.position.y,energyAmount,magicAmount);
             Destroy(gameObject);
         }
     }
@@ -415,7 +415,6 @@ public class CreatureController : MonoBehaviour
         name = data["name"].ToString();
         healthPoint = (int)data["healthPoint"];
         spawnHp = (int) data["spawnHp"];
-        magicPoint = (int)data["magicPoint"];
         attackDamage = (int)data["attackDamage"];
         attackPoint = (int)data["attackPoint"];
         armour = (int)data["armour"];

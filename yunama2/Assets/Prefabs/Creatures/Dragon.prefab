@@ -122,6 +122,8 @@ MonoBehaviour:
   willChangeDirection: 0
   changingDirection: 0
   healthPoint: 10
+  spawnHp: 10
+  currentHP: 0
   magicPoint: 10
   attackDamage: 10
   attackPoint: 10
@@ -148,7 +150,9 @@ MonoBehaviour:
   waitNextActionTime: 0.5
   waitDrainTime: 1.2
   waitDeliverTime: 1.2
+  waitNextAttack: 2
   beforePosition: 
+  enemyController: {fileID: 0}
   creatureDataGO: {fileID: 0}
   creatureData: {fileID: 0}
 --- !u!50 &9144164826656783592
@@ -182,7 +186,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

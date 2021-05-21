@@ -13,6 +13,9 @@ public class DungeonController : MonoBehaviour
     public GameObject dragonPrefab;
     public GameObject mithrilPrefab;
     public GameObject pegasusPrefab;
+    public GameObject pogsusPrefab;
+    public GameObject pugsusPrefab;
+    public GameObject pigsusPrefab;
     public GameObject enemyPrefab;
 
     public GameObject details_object = null;
@@ -69,20 +72,24 @@ public class DungeonController : MonoBehaviour
                         newCreature = Instantiate(energyPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 2) {
                         newCreature = Instantiate(medamaPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    } else if (blockLevel == 3 && isAlone && blockEnergyAmount >= 30) {
+                        newCreature = Instantiate(pogsusPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 3 && isAlone) {
                         newCreature = Instantiate(pegasusPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 3) {
                         newCreature = Instantiate(mithrilPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
-                    } 
+                    }
                 } else {
                     if (blockLevel == 1) {
                         newCreature = Instantiate(magicPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 2) {
                         newCreature = Instantiate(obakePrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    } else if (blockLevel == 3 && isAlone && blockMagicAmount >= 30) {
+                        newCreature = Instantiate(pigsusPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     } else if (blockLevel == 3 && isAlone) {
-                        newCreature = Instantiate(dragonPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
-                    } else if (blockLevel == 3) {
                         newCreature = Instantiate(deathPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
+                    } else if (blockLevel == 3) {
+                        newCreature = Instantiate(dragonPrefab, new Vector3(position[0]+0.5f,-position[1]+0.5f,0), Quaternion.identity);
                     }
                 }
                 CreatureController creatureController = newCreature.GetComponent<CreatureController>();
@@ -188,5 +195,42 @@ public class DungeonController : MonoBehaviour
         CreatureController creatureController = gameObject.GetComponent<CreatureController>();
         int damage = Mathf.CeilToInt(creatureController.healthPoint * 0.3f);
         creatureController.gotDamaged(damage);
+    }
+
+    public void scatterEM (int x, int y, int energyAmount, int magicAmount) {
+        List<BlockController> blockLists = new List<BlockController>();
+        int[] z = new int[] {   
+            x, x-1, x+1, 
+            x-1, x+1, 
+            x, x-1, x+1, 
+            x, x-1, x+1, x-2, x+2, 
+            x-2, x+2, 
+            x-2, x+2, 
+            x-2, x+2, 
+            x
+            };
+        int[] c = new int[] {   
+            Mathf.Abs(y-2), Mathf.Abs(y-2), Mathf.Abs(y-2), 
+            Mathf.Abs(y-1), Mathf.Abs(y-1), 
+            Mathf.Abs(y), Mathf.Abs(y), Mathf.Abs(y), 
+            Mathf.Abs(y-3), Mathf.Abs(y-3), Mathf.Abs(y-3), Mathf.Abs(y-3), Mathf.Abs(y-3), 
+            Mathf.Abs(y-2), Mathf.Abs(y-2), 
+            Mathf.Abs(y-1), Mathf.Abs(y-1), 
+            Mathf.Abs(y), Mathf.Abs(y),
+            Mathf.Abs(y+1)
+            };
+        for (int i=0; i<20; i++) {           
+            GameObject block = GameObject.Find("Block_" + z[i] + "_" + c[i]);
+            if (block) {  
+                blockLists.Add(block.GetComponent<BlockController>());
+            }
+        }
+        for (int i=0; i<blockLists.Count; i++) {
+            blockLists[i].energyAmount += energyAmount / blockLists.Count;
+            blockLists[i].magicAmount += magicAmount / blockLists.Count;
+            if (energyAmount % blockLists.Count >= i+1) blockLists[i].energyAmount++;
+            if (magicAmount % blockLists.Count >= i+1) blockLists[i].magicAmount++;
+        }
+        
     }
 }
