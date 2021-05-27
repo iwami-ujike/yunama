@@ -5,7 +5,7 @@ using UnityEngine;
 public class CreatureData : MonoBehaviour
 {
     private void Start() {
-        Debug.Log("creature data");    
+
     }
 
     public Hashtable getStatus(int level, bool isEnergyType, bool isAlone) {

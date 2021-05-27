@@ -22,7 +22,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] bool waitNextAction = false;
 
     public bool attacking = false;
-    [SerializeField] bool kidnapping = false;
+    public bool foundTarget = false;
+    [SerializeField] bool returningToExit = false;
+    [SerializeField] List<int[]> returnPath = new List<int[]>();
     
     
     [SerializeField] float waitNextAttack = 2f;
@@ -54,16 +56,24 @@ public class EnemyController : MonoBehaviour
         
         animator = GetComponent<Animator>();
 
+        transform.position = dungeonController.getEntrance();
         initalizeWalkedMap();
         beforePosition = currentPosition();
         currentHP = healthPoint;
     }
 
     void FixedUpdate() {
-        if (attacking) { 
+        if (returningToExit) {
+            returnToExit();
+        } else if (attacking) { 
             attack();
         } else if (!changingDirection) {
             move();
+        }
+        
+        if (foundTarget && !returningToExit) {
+            int[] position = currentPosition();
+            searchForExit(position[0], position[1]);
         }
         //animator 
         if (direction==0) {
@@ -100,7 +110,7 @@ public class EnemyController : MonoBehaviour
     public void gotDamaged(int damage) {
         int magicAmount = magicPoint;
         currentHP = Mathf.Max(currentHP - damage, 0);
-        Debug.Log(currentHP);
+        // Debug.Log(currentHP);
         if (currentHP == 0) {
             dungeonController.scatterEM((int)this.transform.position.x,(int)this.transform.position.y,energyAmount,magicAmount);
             Destroy(gameObject);
@@ -204,6 +214,77 @@ public class EnemyController : MonoBehaviour
                 walkedMap[i,j] = 0;
             }
         }
+    }
+
+    void searchForExit(int startX, int startY) {
+        returningToExit = true;
+        var foundEntrance = false;
+        var queueX = new Queue<int>();
+        var queueY = new Queue<int>();
+        int mapWidth = dungeonController.mapWidth;
+        int mapHeight = dungeonController.mapHeight;
+        int entranceX = (mapWidth+dungeonController.wallThickness*2)/2;
+        int entranceY = 1;
+        int goalIndex = toIndex(entranceX, entranceY);
+        int startIndex = toIndex(startX, startY);
+        queueX.Enqueue(startX);
+        queueY.Enqueue(startY);
+
+        int[] visitedArray = new int[(mapWidth + 100) * (mapHeight + 100)];
+        for (int i=0; i<(mapWidth + 100) * (mapHeight + 100); i++) visitedArray[i] = -1;
+        visitedArray[startIndex] = startIndex;
+
+        // 探索待ちのセルがなくなるまで続ける
+        while (queueX.Count > 0 && !foundEntrance) {
+            int currentX = queueX.Dequeue();
+            int currentY = queueY.Dequeue();
+
+            int[] dx = {0, -1, 1, 0};
+            int[] dy = {-1, 0, 0, 1};
+            for(int i=0; i<4; i++){
+                int nextX = currentX + dx[i];
+                int nextY = currentY + dy[i];
+                if(!foundEntrance) {
+                    if (visitedArray[toIndex(nextX, nextY)] == -1 && dungeonController.isBlockEmpty(new int[] {nextX, nextY})) {
+                        setVisited(currentX, currentY, nextX, nextY, ref visitedArray);
+                        if (nextX == entranceX && nextY == entranceY) {
+                            queueX.Clear();
+                            queueY.Clear();
+                            foundEntrance = true;
+                            break;
+                        } else {
+                            queueX.Enqueue(nextX);
+                            queueY.Enqueue(nextY);
+                        }
+                    }
+                }
+            }
+        }
+
+        int beforeIndex = visitedArray[goalIndex];
+        while (beforeIndex >= 0 && beforeIndex != startIndex) {
+            returnPath.Add(toPath(beforeIndex));
+            beforeIndex = visitedArray[beforeIndex];
+        }
+        for(int i=0; i<returnPath.Count; i++) Debug.Log(returnPath[i][0] + "_" + returnPath[i][1]);
+    }
+
+    int toIndex(int x, int y) {
+        return x + dungeonController.mapWidth * y;
+    }
+
+    int[] toPath(int index) {
+        return new int[] {index % dungeonController.mapWidth, index / dungeonController.mapWidth};
+    }
+
+    void setVisited(int fromX, int fromY, int toX, int toY, ref int[] visitedArray) {
+        int from = toIndex(fromX, fromY);
+        int to = toIndex(toX, toY);
+        visitedArray[to] = from;
+    }
+
+    void returnToExit() {
+
     }
 }
 

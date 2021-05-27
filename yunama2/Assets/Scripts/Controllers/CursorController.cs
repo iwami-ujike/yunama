@@ -14,14 +14,14 @@ public class CursorController : MonoBehaviour
     DungeonController dungeonController;
 
     public AudioClip sound_1;
-    AudioSource soundEfect;
+    AudioSource soundEffect;
 
     void Start() {
         dungeonController = DungeonControllerOB.GetComponent<DungeonController>();
         dungeonMapCreator = tileMap.GetComponent<DungeonMapCreator>();
-        transform.position = dungeonController.getEntrance();
+        transform.position = dungeonController.getEntrance() + new Vector3(-0.5f, -3.75f, 0);
 
-        soundEfect = GetComponent<AudioSource>();
+        soundEffect = GetComponent<AudioSource>();
     }
 
     void Update() {
@@ -30,22 +30,22 @@ public class CursorController : MonoBehaviour
 
     public void moveUp(){
         transform.position += new Vector3(0, 1, 0);
-        soundEfect.PlayOneShot(sound_1);
+        soundEffect.PlayOneShot(sound_1);
     }
 
     public void moveLeft(){
         transform.position += new Vector3(-1, 0, 0);
-        soundEfect.PlayOneShot(sound_1);
+        soundEffect.PlayOneShot(sound_1);
     }
 
     public void moveRight(){
         transform.position += new Vector3(1, 0, 0);
-        soundEfect.PlayOneShot(sound_1);
+        soundEffect.PlayOneShot(sound_1);
     }
 
     public void moveDown(){
         transform.position += new Vector3(0, -1, 0);
-        soundEfect.PlayOneShot(sound_1);
+        soundEffect.PlayOneShot(sound_1);
     }
     
     public void cameraZoom() {

@@ -44,7 +44,7 @@ public class DungeonController : MonoBehaviour
     }
 
     public Vector3 getEntrance() {
-        return new Vector3((mapWidth+wallThickness*2)/2.0f-0.5f, -3.75f, 0);
+        return new Vector3((mapWidth+wallThickness*2)/2.0f, 0, 0);
     }
 
     public void destroyBlock(GameObject block) {
@@ -165,7 +165,7 @@ public class DungeonController : MonoBehaviour
         blockMap[y, x] = setNum;
     }
 
-    bool isInsideWall(int x, int y) {
+    public bool isInsideWall(int x, int y) {
         return wallThickness < x && x < mapWidth+wallThickness && 1 <= y && y < mapHeight-1;
     }
 

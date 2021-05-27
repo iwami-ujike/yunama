@@ -173,7 +173,7 @@ public class CreatureController : MonoBehaviour
 
     public void gotDamaged(int damage) {
         currentHP = Mathf.Max(currentHP - damage, 0);
-        Debug.Log(currentHP);
+        // Debug.Log(currentHP);
         if (currentHP == 0) {
             dungeonController.scatterEM((int)this.transform.position.x,(int)this.transform.position.y,energyAmount,magicAmount);
             Destroy(gameObject);
@@ -386,7 +386,7 @@ public class CreatureController : MonoBehaviour
                 carrying = carryingAmount > 1;
                 draining = true;
                 waitDraining = true;
-                Debug.Log("drain");
+                // Debug.Log("drain");
             } else {
                 if (carrying) {
                     if (isEnergy) {
@@ -399,7 +399,7 @@ public class CreatureController : MonoBehaviour
                     carrying = false;
                     delivering = true;
                     waitDelivering = true;
-                    Debug.Log("deliver");
+                    // Debug.Log("deliver");
                 }
             }   
             waitNextAction = true;
@@ -424,7 +424,6 @@ public class CreatureController : MonoBehaviour
 
         isCarryType = (int)data["isCarryType"] == 1;
         isEnergyType = (int)data["isEnergyType"] == 1;
-        Debug.Log((int)data["isEnergyType"]);
 
         if (isCarryType) {
             carryingAmount = carrying_amount;

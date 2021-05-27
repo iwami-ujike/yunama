@@ -10,10 +10,13 @@ public class EnemySearch : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.gameObject.name);
+        // Debug.Log(other.gameObject.name);
         if (other.tag == "Creature") {
             enemyController.attacking = true;
             enemyController.creatureController = other.GetComponent<CreatureController>();
+            // これ何？↑
+        } else if (other.tag == "Player") {
+            enemyController.foundTarget = true;
         }
     }
 }
